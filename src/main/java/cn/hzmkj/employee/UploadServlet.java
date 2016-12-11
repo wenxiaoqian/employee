@@ -185,10 +185,10 @@ public class UploadServlet extends HttpServlet{
                 "field51,field52,field53,field54,field55,field56,field57,field58,field59,field60," +
                 "field61,field62,field63,field64,field65,field66,field67,field68,field69,field70," +
                 "field71,field72,field73,field74,field75,field76,field77,field78,field79,field80," +
-                "field81,field82,field83,field84,field85,field86,field87,field88,field89,field90) " +
+                "field81,field82,field83,field84,field85,field86) " +
                 "values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?," +
                 "?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?," +
-                "?,?,?,?,?,?,?,?,?,?)";
+                "?,?,?,?,?,?)";
 
         PreparedStatement pss = conn.prepareStatement(sql);
         pss.setString(1,values.get("field1"));
@@ -267,10 +267,6 @@ public class UploadServlet extends HttpServlet{
         pss.setString(84,values.get("field84"));
         pss.setString(85,values.get("field85"));
         pss.setString(86,values.get("field86"));
-        pss.setString(87,values.get("field87"));
-        pss.setString(88,values.get("field88"));
-        pss.setString(89,values.get("field89"));
-        pss.setString(90,values.get("field90"));
         pss.executeUpdate();
         pss.close();
     }
@@ -284,8 +280,8 @@ public class UploadServlet extends HttpServlet{
                 "field51=?,field52=?,field53=?,field54=?,field55=?,field56=?,field57=?,field58=?,field59=?,field60=?," +
                 "field61=?,field62=?,field63=?,field64=?,field65=?,field66=?,field67=?,field68=?,field69=?,field70=?," +
                 "field71=?,field72=?,field73=?,field74=?,field75=?,field76=?,field77=?,field78=?,field79=?,field80=?," +
-                "field81=?,field82=?,field83=?,field84=?,field85=?,field86=?,field87=?,field88=?,field89=?,field90=? " +
-                "where field11=?";
+                "field81=?,field82=?,field83=?,field84=?,field85=?,field86=? " +
+                "where field13=?";
 
         PreparedStatement pss = conn.prepareStatement(sql);
         pss.setString(1,values.get("field1"));
@@ -364,10 +360,7 @@ public class UploadServlet extends HttpServlet{
         pss.setString(84,values.get("field84"));
         pss.setString(85,values.get("field85"));
         pss.setString(86,values.get("field86"));
-        pss.setString(87,values.get("field87"));
-        pss.setString(88,values.get("field88"));
-        pss.setString(89,values.get("field89"));
-        pss.setString(90,values.get("field90"));
+        pss.setString(87,values.get("field2"));
         pss.executeUpdate();
         pss.close();
     }
