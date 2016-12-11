@@ -23,6 +23,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -124,8 +125,10 @@ public class UploadServlet extends HttpServlet{
                 headMap.put(j,cellValue);
             }
             // 从第 2 行开始读
+            List<Map<String,String>> values = new ArrayList<Map<String,String>>();
             for(int i=1;i<=lastRowNum;i++){
                 row = sheet.getRow(i);
+                Map<String, String> value = new HashMap<String,String>();
                 for(int j=0;j<totalColumns;j++){
                     cell = row.getCell(j);
                     String cellValue = "";
@@ -138,12 +141,20 @@ public class UploadServlet extends HttpServlet{
                     }else{
                         cellValue = String.valueOf(cell.getStringCellValue());
                     }
+                    value.put(headMap.get(j), cellValue);
                     System.out.println(cellValue);
                 }
+                values.add(value);
             }
+
+            Connection conn = DBTool.getConnection();
+            for(Map<String, String> map : values){
+                //processData(conn, map);
+            }
+            conn.close();
         } catch (FileNotFoundException e) {
             e.printStackTrace();
-        } catch (IOException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
