@@ -23,7 +23,9 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -149,7 +151,7 @@ public class UploadServlet extends HttpServlet{
 
             Connection conn = DBTool.getConnection();
             for(Map<String, String> map : values){
-                //processData(conn, map);
+                processData(conn, map);
             }
             conn.close();
         } catch (FileNotFoundException e) {
@@ -185,33 +187,33 @@ public class UploadServlet extends HttpServlet{
                 "field51,field52,field53,field54,field55,field56,field57,field58,field59,field60," +
                 "field61,field62,field63,field64,field65,field66,field67,field68,field69,field70," +
                 "field71,field72,field73,field74,field75,field76,field77,field78,field79,field80," +
-                "field81,field82,field83,field84,field85,field86) " +
+                "field81,field82,field83,field84,field85,field86,createtime,updatetime) " +
                 "values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?," +
                 "?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?," +
-                "?,?,?,?,?,?)";
+                "?,?,?,?,?,?,?,?)";
 
         PreparedStatement pss = conn.prepareStatement(sql);
-        pss.setString(1,values.get("field1"));
-        pss.setString(2,values.get("field2"));
-        pss.setString(3,values.get("field3"));
-        pss.setString(4,values.get("field4"));
-        pss.setString(5,values.get("field5"));
-        pss.setString(6,values.get("field6"));
-        pss.setString(7,values.get("field7"));
-        pss.setString(8,values.get("field8"));
-        pss.setString(9,values.get("field9"));
-        pss.setString(10,values.get("field10"));
-        pss.setString(11,values.get("field11"));
-        pss.setString(12,values.get("field12"));
-        pss.setString(13,values.get("field13"));
-        pss.setString(14,values.get("field14"));
-        pss.setString(15,values.get("field15"));
-        pss.setString(16,values.get("field16"));
-        pss.setString(17,values.get("field17"));
-        pss.setString(18,values.get("field18"));
-        pss.setString(19,values.get("field19"));
-        pss.setString(20,values.get("field20"));
-        pss.setString(21,values.get("field21"));
+        pss.setString(1,values.get("姓名"));
+        pss.setString(2,values.get("单位"));
+        pss.setString(3,values.get("部门"));
+        pss.setString(4,values.get("班组"));
+        pss.setString(5,values.get("系统编号"));
+        pss.setString(6,values.get("出生日期"));
+        pss.setString(7,values.get("籍贯"));
+        pss.setString(8,values.get("民族"));
+        pss.setString(9,values.get("性别"));
+        pss.setString(10,values.get("工作时间"));
+        pss.setString(11,values.get("政治面貌"));
+        pss.setString(12,values.get("政治面貌加入时间"));
+        pss.setString(13,values.get("身份证号"));
+        pss.setString(14,values.get("专业技术资格名称"));
+        pss.setString(15,values.get("职业资格获得时间"));
+        pss.setString(16,values.get("职务"));
+        pss.setString(17,values.get("职务级别"));
+        pss.setString(18,values.get("任现职务时间"));
+        pss.setString(19,values.get("岗位"));
+        pss.setString(20,values.get("岗级"));
+        pss.setString(21,values.get("个人身份"));
         pss.setString(22,values.get("field22"));
         pss.setString(23,values.get("field23"));
         pss.setString(24,values.get("field24"));
@@ -267,6 +269,11 @@ public class UploadServlet extends HttpServlet{
         pss.setString(84,values.get("field84"));
         pss.setString(85,values.get("field85"));
         pss.setString(86,values.get("field86"));
+
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+        String time = dateFormat.format(new Date());
+        pss.setString(87,time);
+        pss.setString(88,time);
         pss.executeUpdate();
         pss.close();
     }
@@ -280,7 +287,7 @@ public class UploadServlet extends HttpServlet{
                 "field51=?,field52=?,field53=?,field54=?,field55=?,field56=?,field57=?,field58=?,field59=?,field60=?," +
                 "field61=?,field62=?,field63=?,field64=?,field65=?,field66=?,field67=?,field68=?,field69=?,field70=?," +
                 "field71=?,field72=?,field73=?,field74=?,field75=?,field76=?,field77=?,field78=?,field79=?,field80=?," +
-                "field81=?,field82=?,field83=?,field84=?,field85=?,field86=? " +
+                "field81=?,field82=?,field83=?,field84=?,field85=?,field86=?,updatetime=? " +
                 "where field13=?";
 
         PreparedStatement pss = conn.prepareStatement(sql);
@@ -360,7 +367,11 @@ public class UploadServlet extends HttpServlet{
         pss.setString(84,values.get("field84"));
         pss.setString(85,values.get("field85"));
         pss.setString(86,values.get("field86"));
-        pss.setString(87,values.get("field2"));
+
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+        String time = dateFormat.format(new Date());
+        pss.setString(87, time);
+        pss.setString(88,values.get("field2"));
         pss.executeUpdate();
         pss.close();
     }
