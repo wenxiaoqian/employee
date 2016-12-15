@@ -10,6 +10,7 @@ import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.io.PrintWriter;
 
 @WebFilter(value = "/api/*")
 public class AuthFilter implements Filter {
@@ -29,11 +30,11 @@ public class AuthFilter implements Filter {
 
         String access_key = request.getParameter("access_key");
         if(!DBTool.access_key.equals(access_key)){
-            //PrintWriter out = response.getWriter();
-            //out.print("no auth");
-            //out.flush();
-            //out.close();
-            //return;
+            PrintWriter out = response.getWriter();
+            out.print("no auth");
+            out.flush();
+            out.close();
+            return;
         }
         filterChain.doFilter(request,response);
     }

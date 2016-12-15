@@ -11,7 +11,7 @@
  Target Server Version : 50630
  File Encoding         : utf-8
 
- Date: 12/11/2016 20:40:31 PM
+ Date: 12/15/2016 23:34:50 PM
 */
 
 SET NAMES utf8mb4;
@@ -65,8 +65,17 @@ CREATE TABLE `educate` (
   `field16` varchar(500) DEFAULT NULL,
   `field17` varchar(500) DEFAULT NULL,
   `field18` varchar(500) DEFAULT NULL,
+  `createtime` varchar(20) DEFAULT NULL,
+  `updatetime` varchar(20) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+
+-- ----------------------------
+--  Records of `educate`
+-- ----------------------------
+BEGIN;
+INSERT INTO `educate` VALUES ('1', '33', '33', '33', '33', '33', '33', '33', '33', '33', null, null, null, null, null, null, null, null, null, '2016-12-13 11:10:10', '2016-12-13 11:10:10');
+COMMIT;
 
 -- ----------------------------
 --  Table structure for `employee`
@@ -166,8 +175,21 @@ CREATE TABLE `employee` (
   `field90` varchar(500) DEFAULT NULL,
   `createtime` varchar(20) DEFAULT NULL,
   `updatetime` varchar(20) DEFAULT NULL,
+  `field91` varchar(500) DEFAULT NULL,
+  `field92` varchar(500) DEFAULT NULL,
+  `field93` varchar(500) DEFAULT NULL,
+  `field94` varchar(500) DEFAULT NULL,
+  `field95` varchar(500) DEFAULT NULL,
+  `field96` varchar(500) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
+
+-- ----------------------------
+--  Records of `employee`
+-- ----------------------------
+BEGIN;
+INSERT INTO `employee` VALUES ('1', '111', '1111', '1111', '1111', '1111', '1111', '11111', null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, '2016-12-13 10:10:10', '2016-12-13 11:10:10', null, null, null, null, null, null), ('2', 'TTTT', 'TTTT', 'TTTTT', 'TTTT', '090909', null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null), ('3', 'UUUU', 'UUUU', 'UUUU', 'UUU', '876543', null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null), ('4', 'RRRRR', 'RRRR', 'RRRR', 'RRR', '2345678', null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, '2016-12-15 10:42:27 ', '2016-12-15 10:42:27 ', null, null, null, null, null, null);
+COMMIT;
 
 -- ----------------------------
 --  Table structure for `family`
@@ -193,8 +215,17 @@ CREATE TABLE `family` (
   `field16` varchar(500) DEFAULT NULL,
   `field17` varchar(500) DEFAULT NULL,
   `field18` varchar(500) DEFAULT NULL,
+  `createtime` varchar(20) DEFAULT NULL,
+  `updatetime` varchar(20) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+
+-- ----------------------------
+--  Records of `family`
+-- ----------------------------
+BEGIN;
+INSERT INTO `family` VALUES ('1', '111', '111', '1111', '111111', '11111', '11111', '11111', '1111', null, null, null, null, null, null, null, null, null, null, '2016-12-13 11:10:10', '2016-12-13 11:10:10');
+COMMIT;
 
 -- ----------------------------
 --  Table structure for `lend`
@@ -220,14 +251,23 @@ CREATE TABLE `lend` (
   `field16` varchar(500) DEFAULT NULL,
   `field17` varchar(500) DEFAULT NULL,
   `field18` varchar(500) DEFAULT NULL,
+  `createtime` varchar(20) DEFAULT NULL,
+  `updatetime` varchar(20) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 
 -- ----------------------------
---  Table structure for `work`
+--  Records of `lend`
 -- ----------------------------
-DROP TABLE IF EXISTS `work`;
-CREATE TABLE `work` (
+BEGIN;
+INSERT INTO `lend` VALUES ('1', '44', '44', '44', '44', '44', '44', '44', '444', null, null, null, null, null, null, null, null, null, null, '2016-12-13 11:10:10', '2016-12-13 11:10:10');
+COMMIT;
+
+-- ----------------------------
+--  Table structure for `works`
+-- ----------------------------
+DROP TABLE IF EXISTS `works`;
+CREATE TABLE `works` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `field1` varchar(500) DEFAULT NULL,
   `field2` varchar(500) DEFAULT NULL,
@@ -247,7 +287,16 @@ CREATE TABLE `work` (
   `field16` varchar(500) DEFAULT NULL,
   `field17` varchar(500) DEFAULT NULL,
   `field18` varchar(500) DEFAULT NULL,
+  `createtime` varchar(20) DEFAULT NULL,
+  `updatetime` varchar(20) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+
+-- ----------------------------
+--  Records of `works`
+-- ----------------------------
+BEGIN;
+INSERT INTO `works` VALUES ('1', '222', '22', '22', '22', '22', '22', '22', '22', '22', null, null, null, null, null, null, null, null, null, '2016-12-13 11:10:10', '2016-12-13 11:10:10');
+COMMIT;
 
 SET FOREIGN_KEY_CHECKS = 1;
