@@ -1,5 +1,8 @@
 package cn.hzmkj.employee;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -14,6 +17,8 @@ import java.sql.Connection;
  */
 @WebServlet(value = "/api/emp")
 public class EmpServlet extends HttpServlet{
+
+    private static final Logger logger = LoggerFactory.getLogger(EmpServlet.class);
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -31,6 +36,7 @@ public class EmpServlet extends HttpServlet{
         }finally {
             DBTool.closeConnection(conn);
         }
+        logger.info("emp sql:"+sql);
         out.print(result);
         out.flush();
         out.close();

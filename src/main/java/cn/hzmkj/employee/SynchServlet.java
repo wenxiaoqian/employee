@@ -2,6 +2,8 @@ package cn.hzmkj.employee;
 
 import com.alibaba.fastjson.JSON;
 import org.apache.commons.lang.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -24,6 +26,9 @@ import java.util.Map;
  */
 @WebServlet(value = "/api/synch")
 public class SynchServlet extends HttpServlet{
+
+    private static final Logger logger = LoggerFactory.getLogger(SynchServlet.class);
+
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -86,6 +91,7 @@ public class SynchServlet extends HttpServlet{
                 }
                 dataList.add(map);
             }
+            logger.info("emp data:"+sql);
         }catch (Exception ex){
             ex.printStackTrace();
         }
@@ -123,6 +129,7 @@ public class SynchServlet extends HttpServlet{
                 }
                 dataList.add(map);
             }
+            logger.info("work data:"+sql);
         }catch (Exception ex){
             ex.printStackTrace();
         }
@@ -160,6 +167,7 @@ public class SynchServlet extends HttpServlet{
                 }
                 dataList.add(map);
             }
+            logger.info("family data:"+sql);
         }catch (Exception ex){
             ex.printStackTrace();
         }
@@ -197,6 +205,7 @@ public class SynchServlet extends HttpServlet{
                 }
                 dataList.add(map);
             }
+            logger.info("edu data:"+sql);
         }catch (Exception ex){
             ex.printStackTrace();
         }
@@ -234,6 +243,7 @@ public class SynchServlet extends HttpServlet{
                 }
                 dataList.add(map);
             }
+            logger.info("lend data:"+sql);
         }catch (Exception ex){
             ex.printStackTrace();
         }

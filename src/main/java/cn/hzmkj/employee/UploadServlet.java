@@ -475,26 +475,27 @@ public class UploadServlet extends HttpServlet{
     }
 
     public void addWork(Connection conn, Map<String,String> values) throws SQLException {
-        String sql = "insert into works(field1,field2,field3,field4,field5,field6,field7,field8,field9,field10," +
-                "field11,field12,field13,field14,field15,field16,field17) values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+        String sql = "insert into works(id,field1,field2,field3,field4,field5,field6,field7,field8,field9,field10," +
+                "field11,field12,field13,field14,field15,field16,field17) values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
         PreparedStatement pss = conn.prepareStatement(sql);
-        pss.setString(1, values.get("姓名"));
-        pss.setString(2, values.get("身份证号"));
-        pss.setString(3, values.get("起始时间"));
-        pss.setString(4, values.get("终止时间"));
-        pss.setString(5, values.get("工作单位"));
-        pss.setString(6, values.get("部门"));
-        pss.setString(7, values.get("岗位"));
-        pss.setString(8, values.get("岗位标识"));
-        pss.setString(9, values.get("岗位分类-专业"));
-        pss.setString(10, values.get("岗级"));
-        pss.setString(11, values.get("岗位分类-大类"));
-        pss.setString(12, values.get("岗位分类-中类"));
-        pss.setString(13, values.get("岗位分类-小类"));
-        pss.setString(14, values.get("薪级"));
-        pss.setString(15, values.get("预留1"));
-        pss.setString(16, values.get("预留2"));
-        pss.setString(17, values.get("预留3"));
+        pss.setString(1, getUUId());
+        pss.setString(2, values.get("姓名"));
+        pss.setString(3, values.get("身份证号"));
+        pss.setString(4, values.get("起始时间"));
+        pss.setString(5, values.get("终止时间"));
+        pss.setString(6, values.get("工作单位"));
+        pss.setString(7, values.get("部门"));
+        pss.setString(8, values.get("岗位"));
+        pss.setString(9, values.get("岗位标识"));
+        pss.setString(10, values.get("岗位分类-专业"));
+        pss.setString(11, values.get("岗级"));
+        pss.setString(12, values.get("岗位分类-大类"));
+        pss.setString(13, values.get("岗位分类-中类"));
+        pss.setString(14, values.get("岗位分类-小类"));
+        pss.setString(15, values.get("薪级"));
+        pss.setString(16, values.get("预留1"));
+        pss.setString(17, values.get("预留2"));
+        pss.setString(18, values.get("预留3"));
         pss.executeUpdate();
     }
 
@@ -524,23 +525,24 @@ public class UploadServlet extends HttpServlet{
     }
 
     public void addFamily(Connection conn, Map<String,String> values) throws SQLException {
-        String sql = "insert into family(field1,field2,field3,field4,field5,field6,field7,field8,field9,field10," +
-                "field11,field12,field13,field14) values(?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+        String sql = "insert into family(id,field1,field2,field3,field4,field5,field6,field7,field8,field9,field10," +
+                "field11,field12,field13,field14) values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
         PreparedStatement pss = conn.prepareStatement(sql);
-        pss.setString(1, values.get("姓名"));
-        pss.setString(2, values.get("身份证号"));
-        pss.setString(3, values.get("成员"));
-        pss.setString(4, values.get("姓名"));
-        pss.setString(5, values.get("性别"));
-        pss.setString(6, values.get("出生日期"));
-        pss.setString(7, values.get("年龄"));
-        pss.setString(8, values.get("人员政治面貌"));
-        pss.setString(9, values.get("工作单位"));
-        pss.setString(10, values.get("部门"));
-        pss.setString(11, values.get("职务"));
-        pss.setString(12, values.get("预留1"));
-        pss.setString(13, values.get("预留2"));
-        pss.setString(14, values.get("预留3"));
+        pss.setString(1, getUUId());
+        pss.setString(2, values.get("姓名"));
+        pss.setString(3, values.get("身份证号"));
+        pss.setString(4, values.get("成员"));
+        pss.setString(5, values.get("姓名"));
+        pss.setString(6, values.get("性别"));
+        pss.setString(7, values.get("出生日期"));
+        pss.setString(8, values.get("年龄"));
+        pss.setString(9, values.get("人员政治面貌"));
+        pss.setString(10, values.get("工作单位"));
+        pss.setString(11, values.get("部门"));
+        pss.setString(12, values.get("职务"));
+        pss.setString(13, values.get("预留1"));
+        pss.setString(14, values.get("预留2"));
+        pss.setString(15, values.get("预留3"));
         pss.executeUpdate();
     }
 
@@ -567,27 +569,28 @@ public class UploadServlet extends HttpServlet{
     }
 
     public void addEducate(Connection conn, Map<String,String> values) throws SQLException {
-        String sql = "insert into educate(field1,field2,field3,field4,field5,field6,field7,field8,field9,field10," +
-                "field11,field12,field13,field14,field15,field16,field17,field18) values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+        String sql = "insert into educate(id,field1,field2,field3,field4,field5,field6,field7,field8,field9,field10," +
+                "field11,field12,field13,field14,field15,field16,field17,field18) values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
         PreparedStatement pss = conn.prepareStatement(sql);
-        pss.setString(1, values.get("姓名"));
-        pss.setString(2, values.get("身份证号"));
-        pss.setString(3, values.get("开始时间"));
-        pss.setString(4, values.get("结束时间"));
-        pss.setString(5, values.get("教育类型"));
-        pss.setString(6, values.get("院校/培训机构"));
-        pss.setString(7, values.get("专业类别"));
-        pss.setString(8, values.get("专业"));
-        pss.setString(9, values.get("学历"));
-        pss.setString(10, values.get("学位"));
-        pss.setString(11, values.get("教育/培训类型"));
-        pss.setString(12, values.get("是否最高学历标识"));
-        pss.setString(13, values.get("是否就业学历标识"));
-        pss.setString(14, values.get("是否最高学位标识"));
-        pss.setString(15, values.get("是否就业学位标识"));
-        pss.setString(16, values.get("预留1"));
-        pss.setString(17, values.get("预留2"));
-        pss.setString(18, values.get("预留3"));
+        pss.setString(1, getUUId());
+        pss.setString(2, values.get("姓名"));
+        pss.setString(3, values.get("身份证号"));
+        pss.setString(4, values.get("开始时间"));
+        pss.setString(5, values.get("结束时间"));
+        pss.setString(6, values.get("教育类型"));
+        pss.setString(7, values.get("院校/培训机构"));
+        pss.setString(8, values.get("专业类别"));
+        pss.setString(9, values.get("专业"));
+        pss.setString(10, values.get("学历"));
+        pss.setString(11, values.get("学位"));
+        pss.setString(12, values.get("教育/培训类型"));
+        pss.setString(13, values.get("是否最高学历标识"));
+        pss.setString(14, values.get("是否就业学历标识"));
+        pss.setString(15, values.get("是否最高学位标识"));
+        pss.setString(16, values.get("是否就业学位标识"));
+        pss.setString(17, values.get("预留1"));
+        pss.setString(18, values.get("预留2"));
+        pss.setString(19, values.get("预留3"));
         pss.executeUpdate();
     }
 
@@ -618,32 +621,33 @@ public class UploadServlet extends HttpServlet{
     }
 
     public void addLend(Connection conn, Map<String,String> values) throws SQLException {
-        String sql = "insert into lend(field1,field2,field3,field4,field5,field6,field7,field8,field9,field10," +
-                "field11,field12,field13,field14,field15,field16,field17,field18,field19,field20,field21,field22,field23) values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+        String sql = "insert into lend(id,field1,field2,field3,field4,field5,field6,field7,field8,field9,field10," +
+                "field11,field12,field13,field14,field15,field16,field17,field18,field19,field20,field21,field22,field23) values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
         PreparedStatement pss = conn.prepareStatement(sql);
-        pss.setString(1, values.get("姓名"));
-        pss.setString(2, values.get("身份证号"));
-        pss.setString(3, values.get("单位"));
-        pss.setString(4, values.get("部门"));
-        pss.setString(5, values.get("部室/班组"));
-        pss.setString(6, values.get("岗位"));
-        pss.setString(7, values.get("性质"));
-        pss.setString(8, values.get("借出/用单位"));
-        pss.setString(9, values.get("借出/用部门"));
-        pss.setString(10, values.get("借出/用班组"));
-        pss.setString(11, values.get("借出/用岗位"));
-        pss.setString(12, values.get("借出/用时间"));
-        pss.setString(13, values.get("结束时间"));
-        pss.setString(14, values.get("期限"));
-        pss.setString(15, values.get("已借出/用时间"));
-        pss.setString(16, values.get("剩余时间"));
-        pss.setString(17, values.get("是否已返回"));
-        pss.setString(18, values.get("补贴标准"));
-        pss.setString(19, values.get("借出/借用通知"));
-        pss.setString(20, values.get("借出/借用备注"));
-        pss.setString(21, values.get("预留1"));
-        pss.setString(22, values.get("预留2"));
-        pss.setString(23, values.get("预留3"));
+        pss.setString(1, getUUId());
+        pss.setString(2, values.get("姓名"));
+        pss.setString(3, values.get("身份证号"));
+        pss.setString(4, values.get("单位"));
+        pss.setString(5, values.get("部门"));
+        pss.setString(6, values.get("部室/班组"));
+        pss.setString(7, values.get("岗位"));
+        pss.setString(8, values.get("性质"));
+        pss.setString(9, values.get("借出/用单位"));
+        pss.setString(10, values.get("借出/用部门"));
+        pss.setString(11, values.get("借出/用班组"));
+        pss.setString(12, values.get("借出/用岗位"));
+        pss.setString(13, values.get("借出/用时间"));
+        pss.setString(14, values.get("结束时间"));
+        pss.setString(15, values.get("期限"));
+        pss.setString(16, values.get("已借出/用时间"));
+        pss.setString(17, values.get("剩余时间"));
+        pss.setString(18, values.get("是否已返回"));
+        pss.setString(19, values.get("补贴标准"));
+        pss.setString(20, values.get("借出/借用通知"));
+        pss.setString(21, values.get("借出/借用备注"));
+        pss.setString(22, values.get("预留1"));
+        pss.setString(23, values.get("预留2"));
+        pss.setString(24, values.get("预留3"));
         pss.executeUpdate();
     }
 
@@ -676,5 +680,17 @@ public class UploadServlet extends HttpServlet{
         pss.setString(23, values.get("预留3"));
         pss.setString(24, values.get("身份证号"));
         pss.executeUpdate();
+    }
+
+    public String getUUId() {
+        int machineId = 1;//最大支持1-9个集群机器部署
+        int hashCodeV = UUID.randomUUID().toString().hashCode();
+        if(hashCodeV < 0) {//有可能是负数
+            hashCodeV = - hashCodeV;
+        }
+        // 0 代表前面补充0
+        // 4 代表长度为4
+        // d 代表参数为正数型
+        return machineId + String.format("%015d", hashCodeV);
     }
 }
