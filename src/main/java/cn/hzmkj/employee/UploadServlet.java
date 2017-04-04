@@ -173,7 +173,7 @@ public class UploadServlet extends HttpServlet{
 
     public void  processEmpData(Connection conn, Map<String, String> values){
         try {
-            String sql = "select * from employee where field11=?";
+            String sql = "select * from employee where field13=?";
             PreparedStatement pss = conn.prepareStatement(sql);
             pss.setString(1, values.get("身份证号"));
             ResultSet rss = pss.executeQuery();
