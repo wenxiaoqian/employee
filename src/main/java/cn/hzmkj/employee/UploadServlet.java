@@ -89,7 +89,7 @@ public class UploadServlet extends HttpServlet{
                     fileItem.write(file);
                 }
             }
-            request.getRequestDispatcher("/login.jsp").forward(request, response);
+            request.getRequestDispatcher("/upload.jsp").forward(request, response);
         }catch(Exception e){
             e.printStackTrace();
         }
