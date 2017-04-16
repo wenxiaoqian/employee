@@ -3,6 +3,8 @@ package cn.hzmkj.employee;
 import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -20,6 +22,8 @@ import java.util.List;
  */
 @WebServlet(value = "/api/image/upload")
 public class ImageUpload  extends HttpServlet {
+
+    private static final Logger logger = LoggerFactory.getLogger(EmpServlet.class);
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -53,24 +57,12 @@ public class ImageUpload  extends HttpServlet {
         PrintWriter pw = response.getWriter();
         String newFileName = "";
         try{
-            String uname = "";
-            String idcard = "";
+            String uname = request.getParameter("uname");
+            String idcard = request.getParameter("idcard");
             List<FileItem> itemlist = sfu.parseRequest(request);
-            for(FileItem fileItem:itemlist){
-                String fieldName=fileItem.getFieldName();
-                if(fileItem.isFormField()){
-                    //文件名字
-                    String fileName=fileItem.getName();
-                    if("uName".equals(fieldName)){
-                        uname = fileItem.getString();
-                        uname = new String(uname.getBytes("ISO8859-1"), "UTF-8");
-                    }
-                    if("idCard".equals(fieldName)){
-                        idcard = fileItem.getString();
-                    }
-                }
-            }
             newFileName = uname + idcard + ".jpg";
+            logger.info("image name:", newFileName);
+
             for(FileItem fileItem:itemlist){
                 String fieldName=fileItem.getFieldName();
                 if(!fileItem.isFormField()){
