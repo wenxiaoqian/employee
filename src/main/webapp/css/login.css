@@ -1,0 +1,284 @@
+body {
+    font-family:"Microsoft Yahei";
+    font-size:12px;
+    margin:0;
+}
+ul {
+    padding:0;
+    margin:0;
+}
+ul li {
+    list-style-type:none;
+}
+a {
+    text-decoration:none;
+}
+a:hover {
+    text-decoration:none;color:#f00;
+}
+input[type="text"]:focus, input[type="password"]:focus {
+    outline:none;
+}
+input::-ms-clear {
+    display:none;
+}
+.login {
+    margin:0 auto;
+    width:500px;
+    border:2px solid #eee;
+    border-bottom:none;
+    position:relative;
+}
+
+.web_login {
+    width:370px;
+    position:relative;
+}
+#web_login{_left:60px;*left:0;}
+.web_login .login_form {
+    width:272px;
+    margin:0 auto;
+}
+
+.web_login .input-tips {
+    float:left;
+    margin-top:10px;
+    width:50px;
+    height:42px;
+    font-size:16px;
+    line-height:42px;
+    font-family:"Hiragino Sans GB", "Microsoft Yahei";
+}
+
+.web_login .inputOuter {
+    width:200px;
+    height:42px;
+    margin-top:10px;
+    float:left;
+
+}
+
+.web_login .inputstyle {
+    width:350px;
+    height:38px;
+    padding-left:5px;
+    line-height:30px;line-height:38px;
+    border:1px solid #D7D7D7;
+    background:#fff;
+    color:#333;border-radius:2px;
+    font-family:Verdana, Tahoma, Arial;
+    font-size:16px;
+    ime-mode:disabled;
+}
+
+.web_login .uinArea {
+    height:55px;
+    position:relative;
+    z-index:10;
+}
+.web_login .pwdArea {
+    height:55px;
+    margin-bottom:10px;
+    position:relative;
+    z-index:3;
+}
+.web_qr_login {
+    position:relative;
+
+    overflow:hidden;
+}
+
+.login {
+    background-color:#ffffff;
+}
+
+h1{margin:80px auto 50px auto;text-align:center;color:#fff;margin-left:-25px;font-size:35px;font-weight: bold;text-shadow: 0px 1px 1px #555;}
+h1 sup{
+    font-size: 18px;
+    font-style: normal;
+    position: absolute;
+    margin-left: 10px;}
+.login {border:0;padding:5px 0;
+    background: #fff;
+    margin: 0 auto;
+    -webkit-box-shadow: 1px 1px 2px 0 rgba(0, 0, 0, .3);
+    box-shadow: 1px 1px 2px 0 rgba(0, 0, 0, .3);}
+
+.web_login{padding-bottom:20px;}
+
+.jianyi{color:#fff;text-align:center;margin-top:25px;color:#B3B8C4;}
+.reg_form li {
+    height: 55px;
+}
+
+.button_blue
+{
+    display:inline-block;
+    float:left;
+    height:41px;border-radius:4px;
+    background:#2795dc;border:none;cursor:pointer;
+    border-bottom:3px solid #0078b3;*border-bottom:none;
+    color:#fff;
+    font-size:16px;padding:0 10px;*width:140px;
+    text-align:center;outline:none;font-family: "Microsoft Yahei",Arial, Helvetica, sans-serif;
+}
+input.button_blue:hover
+{
+    background:#0081c1;
+    border-bottom:3px solid #006698;*border-bottom:none;
+    color:#fff;
+    text-decoration:none;
+}
+.web_login .login_form {margin-top:30px;}
+.web_login .uinArea {
+    height: 60px;}
+
+a:hover {
+    color: #444;
+}
+a:hover {
+    color: #529bef;
+}
+
+i, u, b, em, span, small {
+    font-weight: normal;
+    font-style: normal;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 12px;
+}
+
+div:after, ul:after, dl:after {
+    content: "";
+    display: block;
+    clear: both;
+    height: 0;
+    visibility: hidden;
+}
+
+.min_height {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    min-height: 450px;
+}
+
+.bg_color {
+    background-color: #ffffff;
+    height: 100%;
+}
+
+.HeadCodeLogin .indexHead {
+    height: 70px;
+    padding-top: 20px;
+    color: #999999;
+    font-size: 12px;
+    text-align: center;
+    position: relative;
+}
+
+.HeadCodeLogin .indexHead .logo_box .h_logo {
+    display: block;
+    margin: auto;
+    width: 145px;
+    height: 75px;
+    background: url(/images/logo.png) no-repeat center;
+    background-size: 100%;
+}
+
+.new_login{
+    margin-top: 80px;
+}
+
+.HeadCodeLogin .indexHead .f_title {
+    text-align: center;
+    line-height: 20px;
+}
+
+.pad_box {
+    padding: 0px 15px;
+    min-height: 200px;
+}
+
+.comment1_text li {
+    height: 35px;
+    line-height: 35px;
+    border-bottom: 1px solid #d3d3d3;
+    position: relative;
+    margin-top: 15px;
+}
+
+li {
+    list-style: none;
+}
+
+.comment1_text li .IconPeople {
+    background: url(//i3.letvimg.com/lc04_iscms/201601/08/17/00/af9c9406fb1a4c78b7666649b8b559f0.png) no-repeat;
+    background-size: auto 89%;
+    background-position: 5px 4px;
+    margin-top: 3px;
+}
+
+.comment1_text li .icon {
+    display: inline-block;
+    float: left;
+    width: 27px;
+    height: 25px;
+    margin-right: 11px;
+}
+
+.comment1_text li .s_input_box {
+    width: 70%;
+}
+
+.comment1_text li input {
+    border: 0px;
+    height: 26px;
+    width: 100%;
+    line-height: 26px;
+    font-size: 15px;
+    color: #020202;
+    background-color: #fff;
+}
+input {
+    outline: none;
+}
+
+.comment1_text li .IconPwd {
+    background: url(//i2.letvimg.com/lc04_iscms/201601/08/17/00/1ae703a099a9413b81c40e745b64265f.png) no-repeat;
+    background-size: auto 99%;
+    background-position: 6px 0px;
+    margin-top: 3px;
+}
+
+
+.pad_box .l_top1 {
+    margin-top: 25px;
+}
+.pad_box .grey_btn {
+    background-color: #45abe5;
+}
+.pad_box .btn {
+    width: 100%;
+    height: 38px;
+    line-height: 38px;
+    text-align: center;
+    border-radius: 5px;
+    margin: 35px auto 0;
+}
+
+.pad_box .btn a:visited {
+    background-color: #0f93de;
+    color: #ffffff;
+}
+.pad_box .grey_btn a, .pad_box .grey_btn span {
+    color: #8dc6ed;
+}
+.pad_box .btn a, .pad_box .btn span {
+    color: #fff;
+    font-size: 18px;
+    display: block;
+    width: 100%;
+    height: 100%;
+    border-radius: 5px;
+}

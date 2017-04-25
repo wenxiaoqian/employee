@@ -25,6 +25,7 @@ CREATE TABLE `account` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `account` varchar(50) DEFAULT NULL,
   `password` varchar(50) DEFAULT NULL,
+  `roleId` varchar(500) DEFAULT NULL ,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 

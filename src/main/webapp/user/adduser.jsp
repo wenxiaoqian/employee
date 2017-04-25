@@ -12,17 +12,10 @@
 <body>
 <form id="user_form">
 <div style="padding:20px;">
-    <c:if test="${deptId != 0}">
-    <div>
-        <label>所在部门：</label>${deptName}
-    </div>
-    </c:if>
+
     <input type="hidden" id="deptId" name="deptId" value="${deptId}"/>
     <div style="margin-top:15px;">
         <label>用户姓名：</label><input class="common-text required" id="uname" name="uname" value="" type="text">
-    </div>
-    <div style="margin-top:15px;">
-        <label>用户手机：</label><input class="common-text required" id="iphone" name="iphone" value="" type="text">
     </div>
     <div style="margin-top:15px;">
         <label>登录密码：</label><input class="common-text required" id="userpwd" name="userpwd" value="" type="password">

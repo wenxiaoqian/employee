@@ -53,6 +53,7 @@ public class LoginApiServlet extends HttpServlet{
                 map.put("id", rss.getString("id"));
                 map.put("account", rss.getString("account"));
                 map.put("password", rss.getString("password"));
+                map.put("roleId", rss.getString("roleId"));
             }
             pss.close();
         }catch (Exception ex){

@@ -1,7 +1,5 @@
 package cn.hzmkj.employee;
 
-import com.airplan.service.UserService;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;

@@ -1,12 +1,12 @@
 <%@ page language="java" contentType="text/html;charset=utf-8" pageEncoding="utf-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"><head>
-    <title>出彩·机场人</title>
+    <title>后台管理界面</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <script type="text/javascript" src="js/jquery.js"></script>
     <link rel="stylesheet" type="text/css" href="css/login.css"/>
     <style type="text/css">
-        body{background: #fff url(../images/1.jpg) 50% 0 no-repeat;}
+        body{background: #fff url(image/1.jpg) 50% 0 no-repeat;}
     </style>
 </head>
 <body>
@@ -58,7 +58,7 @@
             jQuery.ajax({type: "POST",url: "/login",data:$("#login_form").serialize() ,
                 success: function(msg){
                     if(msg == "success"){
-                        window.location.href = "/home/question";
+                        window.location.href = "/home/user";
                     }else{
                         alert(msg);
                     }

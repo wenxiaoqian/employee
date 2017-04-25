@@ -11,10 +11,7 @@
     <script type="text/javascript" src="/js/jquery.js"></script>
     <script type="text/javascript">
         function addUser(deptId){
-            if(deptId == ""){
-                alert("请在左边选中一个部门！");
-                return ;
-            }
+
             parent.asyncbox.open({id:'dealdiv',url:'/home/user?op=add&deptId='+deptId,title:'添加用户',modal:true,width : 550,height:370,btnsbar:parent.jQuery.btn.OKCANCEL,
                 callback : function(action,opener){
                     if(action == 'ok'){
