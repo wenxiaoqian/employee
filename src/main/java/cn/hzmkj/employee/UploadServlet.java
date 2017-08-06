@@ -1,5 +1,6 @@
 package cn.hzmkj.employee;
 
+import java.io.PrintWriter;
 import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
@@ -71,6 +72,7 @@ public class UploadServlet extends HttpServlet{
         sfu.setFileSizeMax(maxSize);
         sfu.setSizeMax(fileMaxSize);
 
+        PrintWriter pw = response.getWriter();
         String newFileName = "";
         try{
 
@@ -89,14 +91,19 @@ public class UploadServlet extends HttpServlet{
                     fileItem.write(file);
                 }
             }
-            request.getRequestDispatcher("/upload.jsp").forward(request, response);
+
+            readExcel(savePath+"/"+newFileName,0);
+            readExcel(savePath+"/"+newFileName,1);
+            readExcel(savePath+"/"+newFileName,2);
+            readExcel(savePath+"/"+newFileName,3);
+
+            pw.print("success");
         }catch(Exception e){
             e.printStackTrace();
+            pw.print("failure");
         }
-        readExcel(savePath+"/"+newFileName,0);
-        readExcel(savePath+"/"+newFileName,1);
-        readExcel(savePath+"/"+newFileName,2);
-        readExcel(savePath+"/"+newFileName,3);
+        pw.flush();
+        pw.close();
     }
 
     public void readExcel(String fileName, int index){
@@ -265,10 +272,9 @@ public class UploadServlet extends HttpServlet{
                 "field51,field52,field53,field54,field55,field56,field57,field58,field59,field60," +
                 "field61,field62,field63,field64,field65,field66,field67,field68,field69,field70," +
                 "field71,field72,field73,field74,field75,field76,field77,field78,field79,field80," +
-                "field81,field82,field83,field84,field85,field86,field87,field88,field89,field90," +
-                "field91,field92,field93,field94,field95,field96,fcreatetime,updatetime) " +
+                "field81,field82,field83,field84,field85,field86,createtime,updatetime) " +
                 "values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?," +
-                "?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?," +
+                "?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?," +
                 "?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 
         PreparedStatement pss = conn.prepareStatement(sql);
@@ -332,36 +338,36 @@ public class UploadServlet extends HttpServlet{
         pss.setString(58,values.get("薪资计算时间"));
         pss.setString(59,values.get("全日制专业类别"));
         pss.setString(60,values.get("全日制教育开始时间"));
-        pss.setString(71,values.get("在职学历"));
-        pss.setString(72,values.get("在职学位"));
-        pss.setString(73,values.get("在职教育毕业学校"));
-        pss.setString(74,values.get("在职教育所学专业"));
-        pss.setString(75,values.get("在职教育专业分类"));
-        pss.setString(76,values.get("在职教育开始业时间"));
-        pss.setString(77,values.get("在职教育毕业时间"));
-        pss.setString(78,values.get("最高教育专业分类"));
-        pss.setString(79,values.get("最高教育开始业时间"));
-        pss.setString(80,values.get("技能鉴定工种"));
-        pss.setString(81,values.get("职业资格获得时间"));
-        pss.setString(82,values.get("专业技术资格系列"));
-        pss.setString(83,values.get("专业技术资格等级"));
-        pss.setString(84,values.get("专业技术资格取得时间"));
-        pss.setString(85,values.get("执业技术资格系列"));
-        pss.setString(86,values.get("执业技术资格等级"));
-        pss.setString(87,values.get("执业技术资格取得时间"));
-        pss.setString(88,values.get("专家人才类型-取得时间"));
-        pss.setString(89,values.get("取得时间"));
-        pss.setString(90,values.get("到期时间"));
-        pss.setString(91,values.get("英语等级1"));
-        pss.setString(92,values.get("分数1"));
-        pss.setString(93,values.get("英语等级2"));
-        pss.setString(94,values.get("分数2"));
-        pss.setString(95,values.get("英语等级3"));
-        pss.setString(96,values.get("分数3"));
+        pss.setString(61,values.get("在职学历"));
+        pss.setString(62,values.get("在职学位"));
+        pss.setString(63,values.get("在职教育毕业学校"));
+        pss.setString(64,values.get("在职教育所学专业"));
+        pss.setString(65,values.get("在职教育专业分类"));
+        pss.setString(66,values.get("在职教育开始业时间"));
+        pss.setString(67,values.get("在职教育毕业时间"));
+        pss.setString(68,values.get("最高教育专业分类"));
+        pss.setString(69,values.get("最高教育开始业时间"));
+        pss.setString(70,values.get("技能鉴定工种"));
+        pss.setString(71,values.get("职业资格获得时间"));
+        pss.setString(72,values.get("专业技术资格系列"));
+        pss.setString(73,values.get("专业技术资格等级"));
+        pss.setString(74,values.get("专业技术资格取得时间"));
+        pss.setString(75,values.get("执业技术资格系列"));
+        pss.setString(76,values.get("执业技术资格等级"));
+        pss.setString(77,values.get("执业技术资格取得时间"));
+        pss.setString(78,values.get("专家人才类型-取得时间"));
+        pss.setString(79,values.get("取得时间"));
+        pss.setString(80,values.get("到期时间"));
+        pss.setString(81,values.get("英语等级1"));
+        pss.setString(82,values.get("分数1"));
+        pss.setString(83,values.get("英语等级2"));
+        pss.setString(84,values.get("分数2"));
+        pss.setString(85,values.get("英语等级3"));
+        pss.setString(86,values.get("分数3"));
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
         String time = dateFormat.format(new Date());
-        pss.setString(97,time);
-        pss.setString(98,time);
+        pss.setString(87,time);
+        pss.setString(88,time);
         pss.executeUpdate();
         pss.close();
     }
@@ -375,8 +381,7 @@ public class UploadServlet extends HttpServlet{
                 "field51=?,field52=?,field53=?,field54=?,field55=?,field56=?,field57=?,field58=?,field59=?,field60=?," +
                 "field61=?,field62=?,field63=?,field64=?,field65=?,field66=?,field67=?,field68=?,field69=?,field70=?," +
                 "field71=?,field72=?,field73=?,field74=?,field75=?,field76=?,field77=?,field78=?,field79=?,field80=?," +
-                "field81=?,field82=?,field83=?,field84=?,field85=?,field86=?,field87=?,field88=?,field89=?,field90=?," +
-                "field91=?,field92=?,field93=?,field94=?,field95=?,field96=?,updatetime=? " +
+                "field81=?,field82=?,field83=?,field84=?,field85=?,field86=?,updatetime=?,deletetime='' " +
                 "where field13=?";
 
         PreparedStatement pss = conn.prepareStatement(sql);
@@ -440,43 +445,43 @@ public class UploadServlet extends HttpServlet{
         pss.setString(58,values.get("薪资计算时间"));
         pss.setString(59,values.get("全日制专业类别"));
         pss.setString(60,values.get("全日制教育开始时间"));
-        pss.setString(71,values.get("在职学历"));
-        pss.setString(72,values.get("在职学位"));
-        pss.setString(73,values.get("在职教育毕业学校"));
-        pss.setString(74,values.get("在职教育所学专业"));
-        pss.setString(75,values.get("在职教育专业分类"));
-        pss.setString(76,values.get("在职教育开始业时间"));
-        pss.setString(77,values.get("在职教育毕业时间"));
-        pss.setString(78,values.get("最高教育专业分类"));
-        pss.setString(79,values.get("最高教育开始业时间"));
-        pss.setString(80,values.get("技能鉴定工种"));
-        pss.setString(81,values.get("职业资格获得时间"));
-        pss.setString(82,values.get("专业技术资格系列"));
-        pss.setString(83,values.get("专业技术资格等级"));
-        pss.setString(84,values.get("专业技术资格取得时间"));
-        pss.setString(85,values.get("执业技术资格系列"));
-        pss.setString(86,values.get("执业技术资格等级"));
-        pss.setString(87,values.get("执业技术资格取得时间"));
-        pss.setString(88,values.get("专家人才类型-取得时间"));
-        pss.setString(89,values.get("取得时间"));
-        pss.setString(90,values.get("到期时间"));
-        pss.setString(91,values.get("英语等级1"));
-        pss.setString(92,values.get("分数1"));
-        pss.setString(93,values.get("英语等级2"));
-        pss.setString(94,values.get("分数2"));
-        pss.setString(95,values.get("英语等级3"));
-        pss.setString(96,values.get("分数3"));
+        pss.setString(61,values.get("在职学历"));
+        pss.setString(62,values.get("在职学位"));
+        pss.setString(63,values.get("在职教育毕业学校"));
+        pss.setString(64,values.get("在职教育所学专业"));
+        pss.setString(65,values.get("在职教育专业分类"));
+        pss.setString(66,values.get("在职教育开始业时间"));
+        pss.setString(67,values.get("在职教育毕业时间"));
+        pss.setString(68,values.get("最高教育专业分类"));
+        pss.setString(69,values.get("最高教育开始业时间"));
+        pss.setString(70,values.get("技能鉴定工种"));
+        pss.setString(71,values.get("职业资格获得时间"));
+        pss.setString(72,values.get("专业技术资格系列"));
+        pss.setString(73,values.get("专业技术资格等级"));
+        pss.setString(74,values.get("专业技术资格取得时间"));
+        pss.setString(75,values.get("执业技术资格系列"));
+        pss.setString(76,values.get("执业技术资格等级"));
+        pss.setString(77,values.get("执业技术资格取得时间"));
+        pss.setString(78,values.get("专家人才类型-取得时间"));
+        pss.setString(79,values.get("取得时间"));
+        pss.setString(80,values.get("到期时间"));
+        pss.setString(81,values.get("英语等级1"));
+        pss.setString(82,values.get("分数1"));
+        pss.setString(83,values.get("英语等级2"));
+        pss.setString(84,values.get("分数2"));
+        pss.setString(85,values.get("英语等级3"));
+        pss.setString(86,values.get("分数3"));
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
         String time = dateFormat.format(new Date());
-        pss.setString(97,time);
-        pss.setString(98,values.get("身份证号"));
+        pss.setString(87,time);
+        pss.setString(88,values.get("身份证号"));
         pss.executeUpdate();
         pss.close();
     }
 
     public void addWork(Connection conn, Map<String,String> values) throws SQLException {
         String sql = "insert into works(id,field1,field2,field3,field4,field5,field6,field7,field8,field9,field10," +
-                "field11,field12,field13,field14,field15,field16,field17) values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+                "field11,field12,field13,field14,field15,field16,field17,createtime,updatetime) values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
         PreparedStatement pss = conn.prepareStatement(sql);
         pss.setString(1, getUUId());
         pss.setString(2, values.get("姓名"));
@@ -496,12 +501,16 @@ public class UploadServlet extends HttpServlet{
         pss.setString(16, values.get("预留1"));
         pss.setString(17, values.get("预留2"));
         pss.setString(18, values.get("预留3"));
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+        String time = dateFormat.format(new Date());
+        pss.setString(19, time);
+        pss.setString(20, time);
         pss.executeUpdate();
     }
 
     public void updateWork(Connection conn, Map<String,String> values) throws SQLException {
         String sql = "update works set field1=?,field2=?,field3=?,field4=?,field5=?,field6=?,field7=?,field8=?,field9=?,field10=?," +
-                "field11=?,field12=?,field13=?,field14=?,field15=?,field16=?,field17=? where field2=?";
+                "field11=?,field12=?,field13=?,field14=?,field15=?,field16=?,field17=?,updatetime=?,deletetime='' where field2=?";
         PreparedStatement pss = conn.prepareStatement(sql);
         pss.setString(1, values.get("姓名"));
         pss.setString(2, values.get("身份证号"));
@@ -520,13 +529,16 @@ public class UploadServlet extends HttpServlet{
         pss.setString(15, values.get("预留1"));
         pss.setString(16, values.get("预留2"));
         pss.setString(17, values.get("预留3"));
-        pss.setString(18, values.get("身份证号"));
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+        String time = dateFormat.format(new Date());
+        pss.setString(18, time);
+        pss.setString(19, values.get("身份证号"));
         pss.executeUpdate();
     }
 
     public void addFamily(Connection conn, Map<String,String> values) throws SQLException {
         String sql = "insert into family(id,field1,field2,field3,field4,field5,field6,field7,field8,field9,field10," +
-                "field11,field12,field13,field14) values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+                "field11,field12,field13,field14,createtime,updatetime) values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
         PreparedStatement pss = conn.prepareStatement(sql);
         pss.setString(1, getUUId());
         pss.setString(2, values.get("姓名"));
@@ -543,12 +555,16 @@ public class UploadServlet extends HttpServlet{
         pss.setString(13, values.get("预留1"));
         pss.setString(14, values.get("预留2"));
         pss.setString(15, values.get("预留3"));
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+        String time = dateFormat.format(new Date());
+        pss.setString(16, time);
+        pss.setString(17, time);
         pss.executeUpdate();
     }
 
     public void updateFamily(Connection conn, Map<String,String> values) throws SQLException {
         String sql = "update family set field1=?,field2=?,field3=?,field4=?,field5=?,field6=?,field7=?,field8=?,field9=?,field10=?," +
-                "field11=?,field12=?,field13=?,field14=? where field2=?";
+                "field11=?,field12=?,field13=?,field14=?,updatetime=? where field2=?,deletetime=''";
         PreparedStatement pss = conn.prepareStatement(sql);
         pss.setString(1, values.get("姓名"));
         pss.setString(2, values.get("身份证号"));
@@ -564,13 +580,16 @@ public class UploadServlet extends HttpServlet{
         pss.setString(12, values.get("预留1"));
         pss.setString(13, values.get("预留2"));
         pss.setString(14, values.get("预留3"));
-        pss.setString(15, values.get("身份证号"));
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+        String time = dateFormat.format(new Date());
+        pss.setString(15, time);
+        pss.setString(16, values.get("身份证号"));
         pss.executeUpdate();
     }
 
     public void addEducate(Connection conn, Map<String,String> values) throws SQLException {
         String sql = "insert into educate(id,field1,field2,field3,field4,field5,field6,field7,field8,field9,field10," +
-                "field11,field12,field13,field14,field15,field16,field17,field18) values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+                "field11,field12,field13,field14,field15,field16,field17,field18,createtime,updatetime) values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
         PreparedStatement pss = conn.prepareStatement(sql);
         pss.setString(1, getUUId());
         pss.setString(2, values.get("姓名"));
@@ -591,12 +610,16 @@ public class UploadServlet extends HttpServlet{
         pss.setString(17, values.get("预留1"));
         pss.setString(18, values.get("预留2"));
         pss.setString(19, values.get("预留3"));
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+        String time = dateFormat.format(new Date());
+        pss.setString(20, time);
+        pss.setString(21, time);
         pss.executeUpdate();
     }
 
     public void updateEducate(Connection conn, Map<String,String> values) throws SQLException {
         String sql = "update educate set field1=?,field2=?,field3=?,field4=?,field5=?,field6=?,field7=?,field8=?,field9=?,field10=?," +
-                "field11=?,field12=?,field13=?,field14=?,field15=?,field16=?,field17=?,field18=? where field2=?";
+                "field11=?,field12=?,field13=?,field14=?,field15=?,field16=?,field17=?,field18=?,updatetime=?,deletetime='' where field2=?";
         PreparedStatement pss = conn.prepareStatement(sql);
         pss.setString(1, values.get("姓名"));
         pss.setString(2, values.get("身份证号"));
@@ -616,13 +639,16 @@ public class UploadServlet extends HttpServlet{
         pss.setString(16, values.get("预留1"));
         pss.setString(17, values.get("预留2"));
         pss.setString(18, values.get("预留3"));
-        pss.setString(19, values.get("身份证号"));
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+        String time = dateFormat.format(new Date());
+        pss.setString(19, time);
+        pss.setString(20, values.get("身份证号"));
         pss.executeUpdate();
     }
 
     public void addLend(Connection conn, Map<String,String> values) throws SQLException {
         String sql = "insert into lend(id,field1,field2,field3,field4,field5,field6,field7,field8,field9,field10," +
-                "field11,field12,field13,field14,field15,field16,field17,field18,field19,field20,field21,field22,field23) values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+                "field11,field12,field13,field14,field15,field16,field17,field18,field19,field20,field21,field22,field23,createtime,updatetime) values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
         PreparedStatement pss = conn.prepareStatement(sql);
         pss.setString(1, getUUId());
         pss.setString(2, values.get("姓名"));
@@ -648,12 +674,16 @@ public class UploadServlet extends HttpServlet{
         pss.setString(22, values.get("预留1"));
         pss.setString(23, values.get("预留2"));
         pss.setString(24, values.get("预留3"));
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+        String time = dateFormat.format(new Date());
+        pss.setString(25, time);
+        pss.setString(26, time);
         pss.executeUpdate();
     }
 
     public void updateLend(Connection conn, Map<String,String> values) throws SQLException {
         String sql = "update educate set field1=?,field2=?,field3=?,field4=?,field5=?,field6=?,field7=?,field8=?,field9=?,field10=?," +
-                "field11=?,field12=?,field13=?,field14=?,field15=?,field16=?,field17=?,field18=?,field19=?,field20=?,field21=?,field22=?,field23=? where field2=?";
+                "field11=?,field12=?,field13=?,field14=?,field15=?,field16=?,field17=?,field18=?,field19=?,field20=?,field21=?,field22=?,field23=?,updatetime=?,deletetime='' where field2=?";
         PreparedStatement pss = conn.prepareStatement(sql);
         pss.setString(1, values.get("姓名"));
         pss.setString(2, values.get("身份证号"));
@@ -678,7 +708,10 @@ public class UploadServlet extends HttpServlet{
         pss.setString(21, values.get("预留1"));
         pss.setString(22, values.get("预留2"));
         pss.setString(23, values.get("预留3"));
-        pss.setString(24, values.get("身份证号"));
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+        String time = dateFormat.format(new Date());
+        pss.setString(24, time);
+        pss.setString(25, values.get("身份证号"));
         pss.executeUpdate();
     }
 

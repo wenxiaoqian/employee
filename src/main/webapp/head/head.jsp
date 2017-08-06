@@ -9,14 +9,13 @@
 <div class="topbar-wrap white">
     <div class="topbar-inner clearfix">
         <div class="topbar-logo-wrap clearfix">
-            <h1 class="topbar-logo none"><a href="/home/question" class="navbar-brand">后台管理</a></h1>
+            <h1 class="topbar-logo none"><a href="/home/user" class="navbar-brand">后台管理</a></h1>
             <ul class="navbar-list clearfix">
-                <li><a class="on" href="/home/question">首页</a></li>
+                <li><a class="on" href="/home/user">首页</a></li>
             </ul>
         </div>
         <div class="top-info-wrap">
             <ul class="top-info-list clearfix">
-                <li><a href="/home/question?status=0">消息<span id="msgId" style="color:red;"></span></a></li>
                 <li><a href="/logout">退出</a></li>
             </ul>
         </div>

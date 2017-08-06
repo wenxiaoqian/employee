@@ -15,14 +15,32 @@
 
     <input type="hidden" id="deptId" name="deptId" value="${deptId}"/>
     <div style="margin-top:15px;">
-        <label>用户姓名：</label><input class="common-text required" id="uname" name="uname" value="" type="text">
+        <label>用户姓名：</label><input class="common-text required" id="account" name="account" value="" type="text">
     </div>
     <div style="margin-top:15px;">
-        <label>登录密码：</label><input class="common-text required" id="userpwd" name="userpwd" value="" type="password">
+        <label>登录密码：</label><input class="common-text required" id="password" name="password" value="" type="password">
     </div>
     <div style="margin-top:15px;">
-        <label>用户权限：</label><input type="checkbox" name="roleId" value="1"/>信息管理
-        <input type="checkbox" name="roleId" value="2"/>允许登录PC电脑
+        <label>用户权限：</label>
+        <input type="checkbox" name="roleId" value="0001"/>滩访市供电局
+
+        <input type="checkbox" name="roleId" value="0002"/>国网安丘市供电公司
+
+        <input type="checkbox" name="roleId" value="0003"/>昌乐供电公司
+
+        <input type="checkbox" name="roleId" value="0004"/>昌邑供电公司
+
+        <input type="checkbox" name="roleId" value="0005"/>高密市供电公司
+
+        <input type="checkbox" name="roleId" value="0006"/>寒亭区供电公司
+
+        <input type="checkbox" name="roleId" value="0007"/>国网临朐县供电公司
+
+        <input type="checkbox" name="roleId" value="0008"/>青州市供电公司
+
+        <input type="checkbox" name="roleId" value="0009"/>国网寿光市供电公司
+
+        <input type="checkbox" name="roleId" value="00010"/>国网诸城市供电公司
     </div>
 
 </div>

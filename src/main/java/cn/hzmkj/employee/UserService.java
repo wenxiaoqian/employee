@@ -29,8 +29,8 @@ public class UserService {
         try {
             PreparedStatement pss = conn.prepareStatement(sql);
             pss.setString(1,userName);
-            pss.setString(3,userPwd);
-            pss.setString(4,roleId);
+            pss.setString(2,userPwd);
+            pss.setString(3,roleId);
             int n = pss.executeUpdate();
             if(n > 0){
                 return true;
@@ -212,6 +212,137 @@ public class UserService {
             DBTool.closeConnection(conn);
         }
         return userBean;
+    }
+
+    /**
+     * 加载所有的部门
+     * @return
+     */
+    public List<HashMap> loadAllDept (){
+        Connection conn = DBTool.getConnection() ;
+        String sql = "select * from department order by departmentID asc";
+        List<HashMap> values = new ArrayList<>();
+        try {
+            PreparedStatement pss = conn.prepareStatement(sql);
+            ResultSet rss = pss.executeQuery();
+            while(rss.next()){
+                HashMap<String,String> value = new HashMap<>();
+                value.put("id",rss.getString("id"));
+                value.put("pno", rss.getString("departmentID"));
+                value.put("pid",rss.getString("pID"));
+                value.put("name",rss.getString("departmentName"));
+                value.put("order",rss.getString("departmentOrder"));
+                values.add(value);
+            }
+        }catch (Exception e){
+            logger.error("UserService login :" ,e);
+        }finally {
+            DBTool.closeConnection(conn);
+        }
+        return values;
+    }
+
+    /**
+     * 加载所有的部门
+     * @return
+     */
+    public HashMap loadDept (int keyId){
+        Connection conn = DBTool.getConnection() ;
+        String sql = "select * from department where id=?";
+        HashMap<String,String> value = new HashMap<>();
+        try {
+            PreparedStatement pss = conn.prepareStatement(sql);
+            pss.setInt(1,keyId);
+            ResultSet rss = pss.executeQuery();
+            if(rss.next()){
+                value.put("id",rss.getString("id"));
+                value.put("pno", rss.getString("departmentID"));
+                value.put("pid",rss.getString("pID"));
+                value.put("name",rss.getString("departmentName"));
+                value.put("order",rss.getString("departmentOrder"));
+            }
+        }catch (Exception e){
+            logger.error("UserService login :" ,e);
+        }finally {
+            DBTool.closeConnection(conn);
+        }
+        return value;
+    }
+
+    /**
+     * 修改部门
+     * @return
+     */
+    public boolean updateDept (String deptName,String deptNo,int keyId){
+        Connection conn = DBTool.getConnection() ;
+        String sql = "update department set departmentName=?,departmentID=? where id=?";
+        HashMap<String,String> value = new HashMap<>();
+        try {
+            PreparedStatement pss = conn.prepareStatement(sql);
+            pss.setString(1,deptName);
+            pss.setString(2,deptNo);
+            pss.setInt(3,keyId);
+            int num = pss.executeUpdate();
+            if(num <= 0){
+                return false;
+            }
+        }catch (Exception e){
+            logger.error("UserService updateDept :" ,e);
+        }finally {
+            DBTool.closeConnection(conn);
+        }
+        return true;
+    }
+
+    /**
+     * 添加部门
+     * @param deptName
+     * @param deptNo
+     * @param parentId
+     * @return
+     */
+    public boolean addDept(String deptName,String deptNo,int parentId){
+        Connection conn = DBTool.getConnection() ;
+        String sql = "insert into department(departmentID,departmentName,pID) values(?,?,?)";
+        try {
+            PreparedStatement pss = conn.prepareStatement(sql);
+            pss.setString(1,deptNo);
+            pss.setString(2,deptName);
+            pss.setInt(3,parentId);
+            int n = pss.executeUpdate();
+            if(n > 0){
+                return true;
+            }
+        }catch (Exception e){
+            logger.error("UserService addDept :" ,e);
+        }finally {
+            DBTool.closeConnection(conn);
+        }
+        return false;
+    }
+
+    /**
+     * 删除部门
+     * @param pid
+     * @return
+     */
+    public boolean deleteDept(int pid) {
+        Connection conn = DBTool.getConnection() ;
+        String sql = "delete from department where id=? or pID = ?";
+        try {
+            PreparedStatement pss = conn.prepareStatement(sql);
+            pss.setInt(1,pid);
+            pss.setInt(2,pid);
+            int n = pss.executeUpdate();
+            if(n > 0){
+                return true;
+            }
+        }catch (Exception e){
+            logger.error("UserService addDept :" ,e);
+        }finally {
+            DBTool.closeConnection(conn);
+        }
+        return false;
     }
 
 }

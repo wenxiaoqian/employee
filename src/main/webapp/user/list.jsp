@@ -23,7 +23,7 @@
     <div class="main-wrap">
 
         <div class="crumb-wrap">
-            <div class="crumb-list"><i class="icon-font"></i><a href="/home/question">首页</a><span class="crumb-step">&gt;</span><span class="crumb-name">用户管理</span></div>
+            <div class="crumb-list"><i class="icon-font"></i><a href="/">首页</a><span class="crumb-step">&gt;</span><span class="crumb-name">用户管理</span></div>
         </div>
         <div class="result-wrap" style="float: left;">
             <iframe id="userlist" name="userlist" src="/home/user?op=userlist" style="border:0px;display:inline-block;height:500px;width:800px;"></iframe>

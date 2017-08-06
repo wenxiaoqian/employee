@@ -16,6 +16,7 @@
                 <a href="#"><i class="icon-font">&#xe018;</i>系统管理</a>
                 <ul class="sub-menu">
                     <li><a href="/home/user"><i class="icon-font">&#xe017;</i>用户管理</a></li>
+                    <li><a href="/home/dept"><i class="icon-font">&#xe017;</i>部门管理</a></li>
                 </ul>
             </li>
         </ul>

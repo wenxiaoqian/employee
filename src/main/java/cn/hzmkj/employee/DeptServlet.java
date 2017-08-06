@@ -1,21 +1,20 @@
 package cn.hzmkj.employee;
 
-import org.apache.commons.lang.StringUtils;
-
-import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.HashMap;
 import java.util.List;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import org.apache.commons.lang.StringUtils;
 
 /**
- * 用户信息管理
+ * 部门信息管理
  */
-@WebServlet("/home/user")
-public class UserServlet extends BaseServlet {
+@WebServlet("/home/dept")
+public class DeptServlet extends BaseServlet {
 
     private UserService userService = new UserService();
 
@@ -37,8 +36,6 @@ public class UserServlet extends BaseServlet {
             update(req,resp);
         }else if("delete".equals(operation)){
             deleteUser(req,resp);
-        }else if("userlist".equals(operation)) {
-            userlist(req, resp);
         }else {
             list(req, resp);
         }
@@ -47,19 +44,21 @@ public class UserServlet extends BaseServlet {
 
     private void deleteUser(HttpServletRequest req, HttpServletResponse resp) throws IOException {
 
-        String userId = req.getParameter("userId");
+        String keyId = req.getParameter("keyId");
 
         PrintWriter out = resp.getWriter();
-        if (StringUtils.isBlank(userId)) {
+        int pid = Integer.parseInt(keyId);
+        if (StringUtils.isBlank(keyId)) {
             out.print("删除失败");
             return;
         }
-        boolean result = userService.deleteUser(Integer.parseInt(userId));
+        boolean result = userService.deleteDept(pid);
         if (result) {
             out.print("success");
         } else {
             out.print("删除失败");
         }
+
     }
 
 
@@ -72,7 +71,13 @@ public class UserServlet extends BaseServlet {
      * @throws IOException
      */
     private void addBefore(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        req.getRequestDispatcher("/user/adduser.jsp").forward(req,resp);
+        String pid = req.getParameter("pid");
+        if(StringUtils.isNotBlank(pid)) {
+            HashMap value = userService.loadDept(Integer.parseInt(pid));
+            req.setAttribute("pid",pid);
+            req.setAttribute("deptName", value.get("name"));
+        }
+        req.getRequestDispatcher("/dept/adddept.jsp").forward(req,resp);
     }
 
     /**
@@ -84,17 +89,18 @@ public class UserServlet extends BaseServlet {
      */
     private void add(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-        String username = req.getParameter("account");
-        String userpwd = req.getParameter("password");
-        String[] roles = req.getParameterValues("roleId");
-        String roleId = StringUtils.join(roles,",");
-        boolean result = userService.addUser(username,userpwd,roleId);
+        String parentId = req.getParameter("parentId");
+        String deptName = req.getParameter("deptName");
+        String deptNo = req.getParameter("deptNo");
+
+        boolean result = userService.addDept(deptName, deptNo, Integer.parseInt(parentId));
         PrintWriter out = resp.getWriter();
         if (result) {
             out.print("success");
         } else {
             out.print("添加失败");
         }
+
     }
 
     /**
@@ -106,12 +112,18 @@ public class UserServlet extends BaseServlet {
      */
     private void updateBefore(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-        String userId = req.getParameter("userId");
+        String keyId = req.getParameter("keyId");
+        if(StringUtils.isNotBlank(keyId)) {
+            HashMap<String,String> value = userService.loadDept(Integer.parseInt(keyId));
+            if(value != null){
+                HashMap parentDept = userService.loadDept(Integer.parseInt(value.get("pid")));
+                req.setAttribute("pid",value.get("pid"));
+                req.setAttribute("deptName",parentDept.get("name"));
+            }
+            req.setAttribute("value", value);
+        }
 
-        UserBean userBean = userService.loadUser(userId);
-        req.setAttribute("user",userBean);
-
-        req.getRequestDispatcher("/user/edituser.jsp").forward(req,resp);
+        req.getRequestDispatcher("/dept/editdept.jsp").forward(req,resp);
 
     }
 
@@ -124,35 +136,43 @@ public class UserServlet extends BaseServlet {
      */
     private void update(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-        String userId = req.getParameter("userId");
-        String username = req.getParameter("account");
-        String userpwd = req.getParameter("password");
-        String[] roles = req.getParameterValues("roleId");
-        String roleId = StringUtils.join(roles,",");
+        String id = req.getParameter("id");
+        String deptName = req.getParameter("deptName");
+        String deptNo = req.getParameter("deptNo");
 
-        boolean result = userService.updateUser(Integer.parseInt(userId),username,userpwd,roleId);
+        boolean result = userService.updateDept(deptName, deptNo, Integer.parseInt(id));
         PrintWriter out = resp.getWriter();
         if (result) {
             out.print("success");
         } else {
             out.print("修改失败");
         }
+
     }
 
     /**
-     * 用户列表
+     * 部门列表
      * @param req
      * @param resp
      */
     private void list(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        List<HashMap> values = userService.loadAllDept();
+        StringBuilder json = new StringBuilder();
+        json.append("[");
+        for(HashMap value : values){
+            String open = "";
+            if("0".equals(value.get("pid"))){
+                open = ",open:true";
+            }
+            json.append("{ id:"+value.get("id")+", pId:"+value.get("pid")+", name:\""+value.get("no") + "-" +value.get("name")+"\""+open+"},");
+        }
+        if(json.indexOf(",") > -1){
+            json.delete(json.length()-1,json.length());
+        }
+        json.append("]");
+        req.setAttribute("json",json.toString());
 
-        req.getRequestDispatcher("/user/list.jsp").forward(req,resp);
+        req.getRequestDispatcher("/dept/list.jsp").forward(req,resp);
     }
 
-    private void userlist(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
-        List<HashMap> userList = userService.queryList();
-        req.setAttribute("userList",userList);
-        req.getRequestDispatcher("/user/userlist.jsp").forward(req,resp);
-    }
 }

@@ -36,6 +36,7 @@
                 callback : function(action,opener){
                     if(action == 'ok'){
                         var formfield = opener.jQuery("#user_form").serialize();
+                        alert(formfield);
                         jQuery.ajax({type: "POST",url: "/home/user?op=update",data:formfield ,
                             success: function(msg){
                                 if(msg == "success"){
@@ -66,17 +67,6 @@
             });
         }
 
-        function forbiddenUser(userId,status){
-            jQuery.ajax({type: "POST",url: "/home/user?op=forbidden&userId="+userId+"&status="+status ,
-                success: function(msg){
-                    if(msg == "success"){
-                        window.location.reload();
-                    }else{
-                        alert(msg);
-                    }
-                }
-            });
-        }
     </script>
 </head>
 <body>
@@ -90,45 +80,48 @@
     <div class="result-content">
         <table class="result-tab" width="800">
             <tr>
-                <th>用户姓名</th>
-                <th>用户部门</th>
-                <th>用户手机</th>
-                <th>状态</th>
+                <th width="60">用户账号</th>
                 <th>用户权限</th>
                 <th>操作</th>
             </tr>
             <c:forEach var="user" items="${userList}">
                 <tr>
-                    <td>${user.name}</td>
-                    <td>${user.deptName}</td>
-                    <td>${user.iphone}</td>
+                    <td>${user.account}</td>
                     <td>
-                        <c:if test="${user.status == 0}">
-                            启用
+                        <c:if test="${fn:indexOf(user.roleId,'0001') > -1}">
+                        滩访市供电局，
                         </c:if>
-                        <c:if test="${user.status == -1}">
-                            禁用
+                        <c:if test="${fn:indexOf(user.roleId,'0002') > -1}">
+                            国网安丘市供电公司，
                         </c:if>
-                    </td>
-                    <td>
-                    <c:if test="${fn:indexOf(user.roleId,'1') > -1}">
-                    信息部
-                    </c:if>
-                    <c:if test="${fn:indexOf(user.roleId,'2') > -1}">
-                    允许登录PC电脑
-                    </c:if>
+                        <c:if test="${fn:indexOf(user.roleId,'0003') > -1}">
+                            昌乐供电公司，
+                        </c:if>
+                        <c:if test="${fn:indexOf(user.roleId,'0004') > -1}">
+                            昌邑供电公司，
+                        </c:if>
+                        <c:if test="${fn:indexOf(user.roleId,'0005') > -1}">
+                            高密市供电公司，
+                        </c:if>
+                        <c:if test="${fn:indexOf(user.roleId,'0006') > -1}">
+                            寒亭区供电公司，
+                        </c:if>
+                        <c:if test="${fn:indexOf(user.roleId,'0007') > -1}">
+                            国网临朐县供电公司，
+                        </c:if>
+                        <c:if test="${fn:indexOf(user.roleId,'0008') > -1}">
+                            青州市供电公司，
+                        </c:if>
+                        <c:if test="${fn:indexOf(user.roleId,'0009') > -1}">
+                            国网寿光市供电公司，
+                        </c:if>
+                        <c:if test="${fn:indexOf(user.roleId,'0010') > -1}">
+                            国网诸城市供电公司，
+                        </c:if>
                     </td>
                     <td>
                         <a class="link-update" href="javascript:editUser('${user.id}');">修改</a>
-                        <c:if test="${user.id != 1}">
                         <a class="link-del" href="javascript:deleteUser('${user.id}');">删除</a>
-                            <c:if test="${user.status == 0}">
-                                <a class="link-del" href="javascript:forbiddenUser('${user.id}',-1);">禁用</a>
-                            </c:if>
-                            <c:if test="${user.status == -1}">
-                                <a class="link-del" href="javascript:forbiddenUser('${user.id}',0);">启用</a>
-                            </c:if>
-                        </c:if>
                     </td>
                 </tr>
             </c:forEach>
