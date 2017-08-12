@@ -648,7 +648,11 @@ public class UploadServlet extends HttpServlet{
 
     public void addLend(Connection conn, Map<String,String> values) throws SQLException {
         String sql = "insert into lend(id,field1,field2,field3,field4,field5,field6,field7,field8,field9,field10," +
-                "field11,field12,field13,field14,field15,field16,field17,field18,field19,field20,field21,field22,field23,createtime,updatetime) values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+                "field11,field12,field13,field14,field15,field16,field17,field18,field19,field20,"
+            + "field21,field22,field23,field24,field25,field26,field27,field28,field29,field30,"
+            + "field31,field32,field33,field34,field35,field36,field37,field38,field39,field40,"
+            + "field41,field42,field43,field44,field45,field46,ield47,field48,field49,createtime,updatetime) "
+            + "values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
         PreparedStatement pss = conn.prepareStatement(sql);
         pss.setString(1, getUUId());
         pss.setString(2, values.get("姓名"));
@@ -670,20 +674,50 @@ public class UploadServlet extends HttpServlet{
         pss.setString(18, values.get("是否已返回"));
         pss.setString(19, values.get("补贴标准"));
         pss.setString(20, values.get("借出/借用通知"));
-        pss.setString(21, values.get("借出/借用备注"));
-        pss.setString(22, values.get("预留1"));
-        pss.setString(23, values.get("预留2"));
-        pss.setString(24, values.get("预留3"));
+        pss.setString(22, values.get("借出/借用备注"));
+
+        pss.setString(22, values.get("出生时间"));
+        pss.setString(23, values.get("籍贯"));
+        pss.setString(24, values.get("民族"));
+        pss.setString(25, values.get("性别"));
+        pss.setString(26, values.get("工作时间"));
+        pss.setString(27, values.get("政治面貌"));
+        pss.setString(28, values.get("加入时间"));
+        pss.setString(29, values.get("技术职称"));
+        pss.setString(30, values.get("取得时间"));
+        pss.setString(31, values.get("职务"));
+        pss.setString(32, values.get("职务级别"));
+        pss.setString(33, values.get("任职时间"));
+        pss.setString(34, values.get("岗位"));
+        pss.setString(35, values.get("岗位级别"));
+        pss.setString(36, values.get("身份"));
+        pss.setString(37, values.get("现有学历"));
+        pss.setString(38, values.get("毕业学校"));
+        pss.setString(39, values.get("所学专业"));
+        pss.setString(40, values.get("毕业时间"));
+        pss.setString(41, values.get("工作学历"));
+        pss.setString(42, values.get("毕业学校"));
+        pss.setString(43, values.get("所学专业"));
+        pss.setString(44, values.get("毕业时间"));
+        pss.setString(45, values.get("职业资格等级"));
+        pss.setString(46, values.get("专业技术资格名称"));
+        pss.setString(47, values.get("专家人才类型"));
+        pss.setString(48, values.get("预留1"));
+        pss.setString(49, values.get("预留2"));
+        pss.setString(50, values.get("预留3"));
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
         String time = dateFormat.format(new Date());
-        pss.setString(25, time);
-        pss.setString(26, time);
+        pss.setString(51, time);
+        pss.setString(52, time);
         pss.executeUpdate();
     }
 
     public void updateLend(Connection conn, Map<String,String> values) throws SQLException {
         String sql = "update educate set field1=?,field2=?,field3=?,field4=?,field5=?,field6=?,field7=?,field8=?,field9=?,field10=?," +
-                "field11=?,field12=?,field13=?,field14=?,field15=?,field16=?,field17=?,field18=?,field19=?,field20=?,field21=?,field22=?,field23=?,updatetime=?,deletetime='' where field2=?";
+                "field11=?,field12=?,field13=?,field14=?,field15=?,field16=?,field17=?,field18=?,field19=?,field20=?,"
+            + "field21=?,field22=?,field23=?,field24=?,field25=?,field26=?,field27=?,field28=?,field29=?,field30=?,"
+            + "field31=?,field32=?,field33=?,field34=?,field35=?,field36=?,field37=?,field38=?,field39=?,field40=?,"
+            + "field41=?,field42=?,field43=?,field44=?,field45=?,field46=?,field47=?,field48=?,field49=?,updatetime=?,deletetime='' where field2=?";
         PreparedStatement pss = conn.prepareStatement(sql);
         pss.setString(1, values.get("姓名"));
         pss.setString(2, values.get("身份证号"));
@@ -705,13 +739,40 @@ public class UploadServlet extends HttpServlet{
         pss.setString(18, values.get("补贴标准"));
         pss.setString(19, values.get("借出/借用通知"));
         pss.setString(20, values.get("借出/借用备注"));
-        pss.setString(21, values.get("预留1"));
-        pss.setString(22, values.get("预留2"));
-        pss.setString(23, values.get("预留3"));
+
+        pss.setString(21, values.get("出生时间"));
+        pss.setString(22, values.get("籍贯"));
+        pss.setString(23, values.get("民族"));
+        pss.setString(24, values.get("性别"));
+        pss.setString(25, values.get("工作时间"));
+        pss.setString(26, values.get("政治面貌"));
+        pss.setString(27, values.get("加入时间"));
+        pss.setString(28, values.get("技术职称"));
+        pss.setString(29, values.get("取得时间"));
+        pss.setString(30, values.get("职务"));
+        pss.setString(31, values.get("职务级别"));
+        pss.setString(32, values.get("任职时间"));
+        pss.setString(33, values.get("岗位"));
+        pss.setString(34, values.get("岗位级别"));
+        pss.setString(35, values.get("身份"));
+        pss.setString(36, values.get("现有学历"));
+        pss.setString(37, values.get("毕业学校"));
+        pss.setString(38, values.get("所学专业"));
+        pss.setString(39, values.get("毕业时间"));
+        pss.setString(40, values.get("工作学历"));
+        pss.setString(41, values.get("毕业学校"));
+        pss.setString(42, values.get("所学专业"));
+        pss.setString(43, values.get("毕业时间"));
+        pss.setString(44, values.get("职业资格等级"));
+        pss.setString(45, values.get("专业技术资格名称"));
+        pss.setString(46, values.get("专家人才类型"));
+        pss.setString(47, values.get("预留1"));
+        pss.setString(48, values.get("预留2"));
+        pss.setString(49, values.get("预留3"));
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
         String time = dateFormat.format(new Date());
-        pss.setString(24, time);
-        pss.setString(25, values.get("身份证号"));
+        pss.setString(50, time);
+        pss.setString(51, values.get("身份证号"));
         pss.executeUpdate();
     }
 

@@ -23,7 +23,7 @@
             <label>部门名称：</label><input class="common-text required" id="deptName" name="deptName" value="${value.name}" type="text">
         </div>
         <div style="margin-top:15px;">
-            <label>部门编号：</label><input class="common-text required" id="deptNo" name="deptNo" value="${value.no}" type="text">
+            <label>部门编号：</label><input class="common-text required" id="deptNo" name="deptNo" value="${value.pno}" type="text">
         </div>
     </div>
 </form>

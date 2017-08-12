@@ -52,6 +52,8 @@ public class SynchServlet extends HttpServlet{
             dataList = loadEduData(lasttime, userId);
         }else if("lend".equals(type)){
             dataList = loadLendData(lasttime, userId);
+        }else if("dept".equals(type)){
+            dataList = loadDeptData();
         }
         String json = JSON.toJSON(dataList).toString();
 
@@ -92,6 +94,41 @@ public class SynchServlet extends HttpServlet{
                 dataList.add(map);
             }
             logger.info("emp data:"+sql);
+        }catch (Exception ex){
+            ex.printStackTrace();
+        }
+
+        return dataList;
+    }
+
+    /**
+     * 同步人事信息
+     * @return
+     */
+    public List<Map<String, String>> loadDeptData(){
+        List<Map<String, String>> dataList = new ArrayList<Map<String, String>>();
+        try{
+            String sql = "select * from department";
+            Connection conn = DBTool.getConnection();
+            PreparedStatement pss = conn.prepareStatement(sql);
+            ResultSet rss = pss.executeQuery();
+            while(rss.next()){
+                ResultSetMetaData meata = pss.getMetaData();
+                int cols = meata.getColumnCount();
+                Map<String,String> map = new HashMap<String, String>();
+                for (int i = 1; i <= cols; i++) {
+                    String column = meata.getColumnName(i) ;
+
+                    String value = rss.getString(column);
+                    if(StringUtils.isBlank(value)){
+                        value = "";
+                    }
+                    map.put(column, value);
+
+                }
+                dataList.add(map);
+            }
+            logger.info("dept data:"+sql);
         }catch (Exception ex){
             ex.printStackTrace();
         }

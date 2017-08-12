@@ -55,10 +55,10 @@
                 return;
             }
 
-            jQuery.ajax({type: "POST",url: "/login",data:$("#login_form").serialize() ,
+            jQuery.ajax({type: "POST",url: "login",data:$("#login_form").serialize() ,
                 success: function(msg){
                     if(msg == "success"){
-                        window.location.href = "/home/user";
+                        window.location.href = "home/user";
                     }else{
                         alert(msg);
                     }

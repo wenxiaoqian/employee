@@ -26,6 +26,8 @@ public class DeptServlet extends BaseServlet {
 
         if("list".equals(operation)){
             list(req,resp);
+        }else if("deptList".equals(operation)){
+            deptList(req, resp);
         }else if("add".equals(operation) && "GET".equals(method)){
             addBefore(req,resp);
         }else if("add".equals(operation) && "POST".equals(method)){
@@ -155,22 +157,32 @@ public class DeptServlet extends BaseServlet {
      * @param req
      * @param resp
      */
-    private void list(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    private void deptList(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         List<HashMap> values = userService.loadAllDept();
         StringBuilder json = new StringBuilder();
         json.append("[");
         for(HashMap value : values){
             String open = "";
             if("0".equals(value.get("pid"))){
-                open = ",open:true";
+                //open = ",open:true";
             }
-            json.append("{ id:"+value.get("id")+", pId:"+value.get("pid")+", name:\""+value.get("no") + "-" +value.get("name")+"\""+open+"},");
+            json.append("{ id:"+value.get("id")+", pId:"+value.get("pid")+", name:\"" + value.get("pno") + "-" +value.get("name")+"\""+open+"},");
         }
         if(json.indexOf(",") > -1){
             json.delete(json.length()-1,json.length());
         }
         json.append("]");
         req.setAttribute("json",json.toString());
+
+        req.getRequestDispatcher("/dept/deptlist.jsp").forward(req,resp);
+    }
+
+    /**
+     * 部门
+     * @param req
+     * @param resp
+     */
+    private void list(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
         req.getRequestDispatcher("/dept/list.jsp").forward(req,resp);
     }
