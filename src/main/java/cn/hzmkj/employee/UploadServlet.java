@@ -563,7 +563,11 @@ public class UploadServlet extends HttpServlet{
             pss.setInt(9, Integer.valueOf(values.get("岗位标识")));
         }
         pss.setString(10, values.get("岗位分类-专业"));
-        pss.setInt(11, Integer.valueOf(values.get("岗级")));
+        if(StringUtils.isBlank(values.get("岗级"))){
+            pss.setInt(11, 0);
+        }else {
+            pss.setInt(11, Integer.valueOf(values.get("岗级")));
+        }
         pss.setString(12, values.get("岗位分类-大类"));
         pss.setString(13, values.get("岗位分类-中类"));
         pss.setString(14, values.get("岗位分类-小类"));
