@@ -174,23 +174,28 @@ CREATE TABLE `employee` (
   `field88` varchar(500) DEFAULT NULL,
   `field89` varchar(500) DEFAULT NULL,
   `field90` varchar(500) DEFAULT NULL,
-  `createtime` varchar(20) DEFAULT NULL,
-  `updatetime` varchar(20) DEFAULT NULL,
   `field91` varchar(500) DEFAULT NULL,
   `field92` varchar(500) DEFAULT NULL,
   `field93` varchar(500) DEFAULT NULL,
   `field94` varchar(500) DEFAULT NULL,
   `field95` varchar(500) DEFAULT NULL,
   `field96` varchar(500) DEFAULT NULL,
+  `field97` varchar(500) DEFAULT NULL,
+  `field98` varchar(500) DEFAULT NULL,
+  `field99` varchar(500) DEFAULT NULL,
+  `field100` varchar(500) DEFAULT NULL,
+  `field101` varchar(500) DEFAULT NULL,
+  `field102` varchar(500) DEFAULT NULL,
+  `field103` varchar(500) DEFAULT NULL,
+  `field104` varchar(500) DEFAULT NULL,
+  `field105` varchar(500) DEFAULT NULL,
+  `field106` varchar(500) DEFAULT NULL,
+  `field107` varchar(500) DEFAULT NULL,
+  `createtime` varchar(20) DEFAULT NULL,
+  `updatetime` varchar(20) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
 
--- ----------------------------
---  Records of `employee`
--- ----------------------------
-BEGIN;
-INSERT INTO `employee` VALUES ('1', '111', '1111', '1111', '1111', '1111', '1111', '11111', null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, '2016-12-13 10:10:10', '2016-12-13 11:10:10', null, null, null, null, null, null), ('2', 'TTTT', 'TTTT', 'TTTTT', 'TTTT', '090909', null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null), ('3', 'UUUU', 'UUUU', 'UUUU', 'UUU', '876543', null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null), ('4', 'RRRRR', 'RRRR', 'RRRR', 'RRR', '2345678', null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, '2016-12-15 10:42:27 ', '2016-12-15 10:42:27 ', null, null, null, null, null, null);
-COMMIT;
 
 -- ----------------------------
 --  Table structure for `family`
