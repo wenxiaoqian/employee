@@ -91,7 +91,7 @@ public class ExportServlet extends HttpServlet{
                 cell.setCellValue(headString);
             }
             List<Map<String, String>> empList = loadEmpData();
-            int rowNum = 2;
+            int rowNum = 1;
             for(Map<String, String> rowMap : empList) {
                 HSSFRow row = sheet.createRow(rowNum);
                 for(int i = 0; i < 17; i++) {
@@ -127,7 +127,7 @@ public class ExportServlet extends HttpServlet{
                 cell.setCellValue(headString);
             }
             List<Map<String, String>> empList = loadFamilyData();
-            int rowNum = 2;
+            int rowNum = 1;
             for(Map<String, String> rowMap : empList) {
                 HSSFRow row = sheet.createRow(rowNum);
                 for(int i = 0; i < 14; i++) {
@@ -163,7 +163,7 @@ public class ExportServlet extends HttpServlet{
                 cell.setCellValue(headString);
             }
             List<Map<String, String>> empList = loadEduData();
-            int rowNum = 2;
+            int rowNum = 1;
             for(Map<String, String> rowMap : empList) {
                 HSSFRow row = sheet.createRow(rowNum);
                 for(int i = 0; i < 18; i++) {
@@ -199,7 +199,7 @@ public class ExportServlet extends HttpServlet{
                 cell.setCellValue(headString);
             }
             List<Map<String, String>> empList = loadLendData();
-            int rowNum = 2;
+            int rowNum = 1;
             for(Map<String, String> rowMap : empList) {
                 HSSFRow row = sheet.createRow(rowNum);
                 for(int i = 0; i < 51; i++) {
@@ -230,7 +230,7 @@ public class ExportServlet extends HttpServlet{
                 cell.setCellValue(headString);
             }
             List<Map<String, String>> empList = loadEmpData();
-            int rowNum = 2;
+            int rowNum = 1;
             for(Map<String, String> rowMap : empList) {
                 HSSFRow row = sheet.createRow(rowNum);
                 for(int i = 0; i < 107; i++) {
@@ -255,7 +255,7 @@ public class ExportServlet extends HttpServlet{
     public List<Map<String, String>> loadEmpData(){
         List<Map<String, String>> dataList = new ArrayList<Map<String, String>>();
         try{
-            String sql = "select * from employee order by id";
+            String sql = "select * from employee where deletetime is null order by id";
             Connection conn = DBTool.getConnection();
             PreparedStatement pss = conn.prepareStatement(sql);
             ResultSet rss = pss.executeQuery();
