@@ -32,12 +32,16 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * 上传数据API
  */
 @WebServlet(value = "/api/upload")
 public class UploadServlet extends HttpServlet{
+
+    private static final Logger logger = LoggerFactory.getLogger(UploadServlet.class);
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -144,9 +148,9 @@ public class UploadServlet extends HttpServlet{
                     String cellValue = "";
                     if(cell == null) {
                         cellValue = "";
-                    }else if(cell.getCellType() == cell.CELL_TYPE_NUMERIC){
+                    }else if(cell.getCellType() == HSSFCell.CELL_TYPE_NUMERIC){
                         cellValue = String.valueOf(cell.getNumericCellValue());
-                    }else if (cell.getCellType() == cell.CELL_TYPE_STRING){
+                    }else if (cell.getCellType() == HSSFCell.CELL_TYPE_STRING){
                         cellValue = String.valueOf(cell.getStringCellValue());
                     }else{
                         cellValue = String.valueOf(cell.getStringCellValue());
@@ -180,6 +184,7 @@ public class UploadServlet extends HttpServlet{
     }
 
     public void  processEmpData(Connection conn, Map<String, String> values){
+        System.out.println("row:"+values);
         try {
             String sql = "select * from employee where field13=?";
             PreparedStatement pss = conn.prepareStatement(sql);
@@ -274,23 +279,22 @@ public class UploadServlet extends HttpServlet{
                 "field61,field62,field63,field64,field65,field66,field67,field68,field69,field70," +
                 "field71,field72,field73,field74,field75,field76,field77,field78,field79,field80," +
                 "field81,field82,field83,field84,field85,field86,field87,field88,field89,field90," +
-                "field91,field92,field93,field94,field95,field96,field97,field98,field99,field100," +
-                "field101,field102,field103,field104,field105,field106,field107,field108,field109,createtime,updatetime) " +
+                "field91,field92,field93,field94,field95,createtime,updatetime) " +
                 "values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?," +
                 "?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?," +
-                "?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+                "?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 
         PreparedStatement pss = conn.prepareStatement(sql);
         pss.setString(1,values.get("姓名"));
         pss.setString(2,values.get("单位"));
         pss.setString(3,values.get("部门"));
-        pss.setString(4,values.get("班组"));
+        pss.setString(4,values.get("部室/班组"));
         pss.setString(5,values.get("系统编号"));
         pss.setString(6,values.get("出生日期"));
         pss.setString(7,values.get("籍贯"));
         pss.setString(8,values.get("民族"));
         pss.setString(9,values.get("性别"));
-        pss.setString(10,values.get("工作时间"));
+        pss.setString(10,values.get("参加工作时间"));
         pss.setString(11,values.get("政治面貌"));
         pss.setString(12,values.get("政治面貌加入时间"));
         pss.setString(13,values.get("身份证号"));
@@ -300,10 +304,11 @@ public class UploadServlet extends HttpServlet{
         pss.setString(17,values.get("职务级别、岗位标识"));
         pss.setString(18,values.get("任现职务时间"));
         pss.setString(19,values.get("岗位"));
-        if(StringUtils.isBlank(values.get("岗级"))) {
+        String gangji = values.get("岗级");
+        if(gangji==null || "".equals(gangji.trim()) || "null".equals(gangji.trim())) {
             pss.setInt(20, 0);
         }else{
-            pss.setInt(20, Integer.valueOf(values.get("岗级")));
+            pss.setInt(20, Integer.valueOf(gangji));
         }
         pss.setString(21,values.get("个人身份"));
         pss.setString(22,values.get("全日制学历"));
@@ -315,14 +320,15 @@ public class UploadServlet extends HttpServlet{
         pss.setString(28,values.get("最高教育所学专业"));
         pss.setString(29,values.get("最高教育毕业时间"));
         pss.setString(30,values.get("职业资格等级"));
-        pss.setString(31,values.get("专业技术资格名称"));
-        pss.setString(32,values.get("专家人才类型"));
+        pss.setString(31,values.get("专家人才类型"));
+        pss.setString(32,values.get("专家人才类型-取得时间"));
         pss.setString(33,values.get("集中部署ID"));
         pss.setString(34,values.get("本地ERPID"));
-        if(StringUtils.isBlank(values.get("薪级"))) {
+        String xinji = values.get("薪级");
+        if(xinji==null || "".equals(xinji.trim()) || "null".equals(xinji.trim())) {
             pss.setInt(35, 0);
         }else{
-            pss.setInt(35, Integer.valueOf(values.get("薪级")));
+            pss.setInt(35, Integer.valueOf(xinji));
         }
         pss.setString(36,values.get("岗位分类代码"));
         pss.setString(37,values.get("岗位分类-大类"));
@@ -347,60 +353,45 @@ public class UploadServlet extends HttpServlet{
         pss.setString(56,values.get("进入本单位时间"));
         pss.setString(57,values.get("进入电力行业时间"));
         pss.setString(58,values.get("薪资计算时间"));
-        pss.setString(59,values.get("政治面貌"));
-        pss.setString(60,values.get("政治面貌加入时间"));
-        pss.setString(61,values.get("全日制学历"));
-        pss.setString(62,values.get("全日制学位"));
-        pss.setString(63,values.get("全日制毕业学校"));
-        pss.setString(64,values.get("全日制所学专业"));
-        pss.setString(65,values.get("全日制专业类别"));
-        pss.setString(66,values.get("全日制教育开始时间"));
-        pss.setString(67,values.get("全日制教育毕业时间"));
-        pss.setString(68,values.get("在职学历"));
-        pss.setString(69,values.get("在职学位"));
-        pss.setString(70,values.get("在职教育毕业学校"));
-        pss.setString(71,values.get("在职教育所学专业"));
-        pss.setString(72,values.get("在职教育专业分类"));
-        pss.setString(73,values.get("在职教育开始业时间"));
-        pss.setString(75,values.get("在职教育毕业时间"));
-        pss.setString(76,values.get("最高学历"));
-        pss.setString(77,values.get("最高学位"));
-        pss.setString(78,values.get("最高教育毕业学校"));
-        pss.setString(79,values.get("最高教育所学专业"));
-        pss.setString(80,values.get("最高教育专业分类"));
-        pss.setString(81,values.get("最高教育开始业时间"));
-        pss.setString(82,values.get("最高教育毕业时间"));
-        pss.setString(83,values.get("技能鉴定工种"));
-        pss.setString(84,values.get("职业资格等级"));
-        pss.setString(85,values.get("职业资格获得时间"));
-        pss.setString(86,values.get("专业技术资格名称"));
-        pss.setString(87,values.get("专业技术资格系列"));
-        pss.setString(88,values.get("专业技术资格等级"));
-        pss.setString(89,values.get("专业技术资格取得时间"));
-        pss.setString(90,values.get("执业技术资格系列"));
-        pss.setString(91,values.get("执业技术资格等级"));
-        pss.setString(92,values.get("执业技术资格取得时间"));
-        pss.setString(93,values.get("专家人才类型"));
-        pss.setString(94,values.get("专家人才类型-取得时间"));
-        pss.setString(95,values.get("取得时间"));
-        pss.setString(96,values.get("到期时间"));
-        pss.setString(97, values.get("任现岗位时间"));
-        pss.setString(98, values.get("任现级别年限"));
-        pss.setString(99,values.get("英语等级1"));
-        pss.setString(100,values.get("分数1"));
-        pss.setString(101,values.get("英语等级2"));
-        pss.setString(102,values.get("分数2"));
-        pss.setString(103,values.get("英语等级3"));
-        pss.setString(104,values.get("分数3"));
-        pss.setString(105,values.get("预留1"));
-        pss.setString(106,values.get("预留2"));
-        pss.setString(107,values.get("预留3"));
-        pss.setString(108,values.get("预留4"));
-        pss.setString(109,values.get("预留5"));
+        pss.setString(59,values.get("全日制学位"));
+        pss.setString(60,values.get("全日制教育开始时间"));
+        pss.setString(61,values.get("在职学历"));
+        pss.setString(62,values.get("在职学位"));
+        pss.setString(63,values.get("在职教育毕业学校"));
+        pss.setString(64,values.get("在职教育所学专业"));
+        pss.setString(65,values.get("在职教育专业分类"));
+        pss.setString(66,values.get("在职教育开始业时间"));
+        pss.setString(67,values.get("在职教育毕业时间"));
+        pss.setString(68,values.get("最高学位"));
+        pss.setString(69,values.get("最高教育专业分类"));
+        pss.setString(70,values.get("最高教育开始业时间"));
+        pss.setString(71,values.get("技能鉴定工种"));
+        pss.setString(72,values.get("专业技术资格系列"));
+        pss.setString(73,values.get("专业技术资格等级"));
+        pss.setString(74,values.get("专业技术资格取得时间"));
+        pss.setString(75,values.get("执业技术资格系列"));
+        pss.setString(76,values.get("执业技术资格等级"));
+        pss.setString(77,values.get("执业技术资格取得时间"));
+        pss.setString(78,values.get("出生地"));
+        pss.setString(79,values.get("取得时间"));
+        pss.setString(80,values.get("到期时间"));
+        pss.setString(81, values.get("任现岗位时间"));
+        pss.setString(82, values.get("任现级别年限"));
+        pss.setString(83,values.get("英语等级1"));
+        pss.setString(84,values.get("分数1"));
+        pss.setString(85,values.get("英语等级2"));
+        pss.setString(86,values.get("分数2"));
+        pss.setString(87,values.get("英语等级3"));
+        pss.setString(88,values.get("分数3"));
+        pss.setString(89,values.get("预留1"));
+        pss.setString(90,values.get("预留2"));
+        pss.setString(91,values.get("预留3"));
+        pss.setString(92,values.get("预留4"));
+        pss.setString(93,values.get("预留5"));
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
         String time = dateFormat.format(new Date());
-        pss.setString(110,time);
-        pss.setString(111,time);
+        pss.setString(94,time);
+        pss.setString(95,time);
         pss.executeUpdate();
         pss.close();
     }
@@ -415,21 +406,20 @@ public class UploadServlet extends HttpServlet{
                 "field61=?,field62=?,field63=?,field64=?,field65=?,field66=?,field67=?,field68=?,field69=?,field70=?," +
                 "field71=?,field72=?,field73=?,field74=?,field75=?,field76=?,field77=?,field78=?,field79=?,field80=?," +
                 "field81=?,field82=?,field83=?,field84=?,field85=?,field86=?,field87=?,field88=?,field89=?,field90=?," +
-                "field91=?,field92=?,field93=?,field94=?,field95=?,field96=?,field97=?,field98=?,field99=?,field100=?," +
-                "field101=?,field102=?,field103=?,field104=?,field105=?,field106=?,field107=?,field108=?,field109=?,updatetime=?,deletetime='' " +
+                "field91=?,field92=?,field93=?,field94=?,field95=?,updatetime=?,deletetime='' " +
                 "where field13=?";
 
         PreparedStatement pss = conn.prepareStatement(sql);
         pss.setString(1,values.get("姓名"));
         pss.setString(2,values.get("单位"));
         pss.setString(3,values.get("部门"));
-        pss.setString(4,values.get("班组"));
+        pss.setString(4,values.get("部室/班组"));
         pss.setString(5,values.get("系统编号"));
         pss.setString(6,values.get("出生日期"));
         pss.setString(7,values.get("籍贯"));
         pss.setString(8,values.get("民族"));
         pss.setString(9,values.get("性别"));
-        pss.setString(10,values.get("工作时间"));
+        pss.setString(10,values.get("参加工作时间"));
         pss.setString(11,values.get("政治面貌"));
         pss.setString(12,values.get("政治面貌加入时间"));
         pss.setString(13,values.get("身份证号"));
@@ -439,10 +429,12 @@ public class UploadServlet extends HttpServlet{
         pss.setString(17,values.get("职务级别、岗位标识"));
         pss.setString(18,values.get("任现职务时间"));
         pss.setString(19,values.get("岗位"));
-        if(StringUtils.isBlank(values.get("岗级"))) {
+        String field20 = values.get("岗级");
+        if(field20 == null || "".equals(field20) || "null".equals(field20)) {
             pss.setInt(20, 0);
         }else{
-            pss.setInt(20, Integer.valueOf(values.get("岗级")));
+            field20 = field20.substring(0,field20.lastIndexOf("."));
+            pss.setInt(20, Integer.valueOf(field20));
         }
         pss.setString(21,values.get("个人身份"));
         pss.setString(22,values.get("全日制学历"));
@@ -454,14 +446,16 @@ public class UploadServlet extends HttpServlet{
         pss.setString(28,values.get("最高教育所学专业"));
         pss.setString(29,values.get("最高教育毕业时间"));
         pss.setString(30,values.get("职业资格等级"));
-        pss.setString(31,values.get("专业技术资格名称"));
-        pss.setString(32,values.get("专家人才类型"));
+        pss.setString(31,values.get("专家人才类型"));
+        pss.setString(32,values.get("专家人才类型-取得时间"));
         pss.setString(33,values.get("集中部署ID"));
         pss.setString(34,values.get("本地ERPID"));
-        if(StringUtils.isBlank(values.get("薪级"))) {
+        String field35 = values.get("薪级");
+        if(field35 == null || "".equals(field35) || "null".equals(field35)) {
             pss.setInt(35, 0);
         }else{
-            pss.setInt(35, Integer.valueOf(values.get("薪级")));
+            field35 = field35.substring(0,field35.lastIndexOf("."));
+            pss.setInt(35, Integer.valueOf(field35));
         }
         pss.setString(36,values.get("岗位分类代码"));
         pss.setString(37,values.get("岗位分类-大类"));
@@ -486,61 +480,46 @@ public class UploadServlet extends HttpServlet{
         pss.setString(56,values.get("进入本单位时间"));
         pss.setString(57,values.get("进入电力行业时间"));
         pss.setString(58,values.get("薪资计算时间"));
-        pss.setString(59,values.get("政治面貌"));
-        pss.setString(60,values.get("政治面貌加入时间"));
-        pss.setString(61,values.get("全日制学历"));
-        pss.setString(62,values.get("全日制学位"));
-        pss.setString(63,values.get("全日制毕业学校"));
-        pss.setString(64,values.get("全日制所学专业"));
-        pss.setString(65,values.get("全日制专业类别"));
-        pss.setString(66,values.get("全日制教育开始时间"));
-        pss.setString(67,values.get("全日制教育毕业时间"));
-        pss.setString(68,values.get("在职学历"));
-        pss.setString(69,values.get("在职学位"));
-        pss.setString(70,values.get("在职教育毕业学校"));
-        pss.setString(71,values.get("在职教育所学专业"));
-        pss.setString(72,values.get("在职教育专业分类"));
-        pss.setString(73,values.get("在职教育开始业时间"));
-        pss.setString(75,values.get("在职教育毕业时间"));
-        pss.setString(76,values.get("最高学历"));
-        pss.setString(77,values.get("最高学位"));
-        pss.setString(78,values.get("最高教育毕业学校"));
-        pss.setString(79,values.get("最高教育所学专业"));
-        pss.setString(80,values.get("最高教育专业分类"));
-        pss.setString(81,values.get("最高教育开始业时间"));
-        pss.setString(82,values.get("最高教育毕业时间"));
-        pss.setString(83,values.get("技能鉴定工种"));
-        pss.setString(84,values.get("职业资格等级"));
-        pss.setString(85,values.get("职业资格获得时间"));
-        pss.setString(86,values.get("专业技术资格名称"));
-        pss.setString(87,values.get("专业技术资格系列"));
-        pss.setString(88,values.get("专业技术资格等级"));
-        pss.setString(89,values.get("专业技术资格取得时间"));
-        pss.setString(90,values.get("执业技术资格系列"));
-        pss.setString(91,values.get("执业技术资格等级"));
-        pss.setString(92,values.get("执业技术资格取得时间"));
-        pss.setString(93,values.get("专家人才类型"));
-        pss.setString(94,values.get("专家人才类型-取得时间"));
-        pss.setString(95,values.get("取得时间"));
-        pss.setString(96,values.get("到期时间"));
-        pss.setString(97, values.get("任现岗位时间"));
-        pss.setString(98, values.get("任现级别年限"));
-        pss.setString(99,values.get("英语等级1"));
-        pss.setString(100,values.get("分数1"));
-        pss.setString(101,values.get("英语等级2"));
-        pss.setString(102,values.get("分数2"));
-        pss.setString(103,values.get("英语等级3"));
-        pss.setString(104,values.get("分数3"));
-        pss.setString(105,values.get("预留1"));
-        pss.setString(106,values.get("预留2"));
-        pss.setString(107,values.get("预留3"));
-        pss.setString(108,values.get("预留4"));
-        pss.setString(109,values.get("预留5"));
+        pss.setString(59,values.get("全日制学位"));
+        pss.setString(60,values.get("全日制教育开始时间"));
+        pss.setString(61,values.get("在职学历"));
+        pss.setString(62,values.get("在职学位"));
+        pss.setString(63,values.get("在职教育毕业学校"));
+        pss.setString(64,values.get("在职教育所学专业"));
+        pss.setString(65,values.get("在职教育专业分类"));
+        pss.setString(66,values.get("在职教育开始业时间"));
+        pss.setString(67,values.get("在职教育毕业时间"));
+        pss.setString(68,values.get("最高学位"));
+        pss.setString(69,values.get("最高教育专业分类"));
+        pss.setString(70,values.get("最高教育开始业时间"));
+        pss.setString(71,values.get("技能鉴定工种"));
+        pss.setString(72,values.get("专业技术资格系列"));
+        pss.setString(73,values.get("专业技术资格等级"));
+        pss.setString(74,values.get("专业技术资格取得时间"));
+        pss.setString(75,values.get("执业技术资格系列"));
+        pss.setString(76,values.get("执业技术资格等级"));
+        pss.setString(77,values.get("执业技术资格取得时间"));
+        pss.setString(78,values.get("出生地"));
+        pss.setString(79,values.get("取得时间"));
+        pss.setString(80,values.get("到期时间"));
+        pss.setString(81, values.get("任现岗位时间"));
+        pss.setString(82, values.get("任现级别年限"));
+        pss.setString(83,values.get("英语等级1"));
+        pss.setString(84,values.get("分数1"));
+        pss.setString(85,values.get("英语等级2"));
+        pss.setString(86,values.get("分数2"));
+        pss.setString(87,values.get("英语等级3"));
+        pss.setString(88,values.get("分数3"));
+        pss.setString(89,values.get("预留1"));
+        pss.setString(90,values.get("预留2"));
+        pss.setString(91,values.get("预留3"));
+        pss.setString(92,values.get("预留4"));
+        pss.setString(93,values.get("预留5"));
 
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
         String time = dateFormat.format(new Date());
-        pss.setString(110,time);
-        pss.setString(111,values.get("身份证号"));
+        pss.setString(94,time);
+        pss.setString(95,values.get("身份证号"));
         pss.executeUpdate();
         pss.close();
     }
@@ -557,21 +536,31 @@ public class UploadServlet extends HttpServlet{
         pss.setString(6, values.get("工作单位"));
         pss.setString(7, values.get("部门"));
         pss.setString(8, values.get("岗位"));
-        if(StringUtils.isBlank(values.get("岗位标识"))) {
+        String field8 = values.get("岗位标识");
+        if(field8 == null || "".equals(field8) || "null".equals(field8)) {
             pss.setInt(9, 0);
         }else{
-            pss.setInt(9, Integer.valueOf(values.get("岗位标识")));
+            field8 = field8.substring(0,field8.lastIndexOf("."));
+            pss.setInt(9, Integer.valueOf(field8));
         }
         pss.setString(10, values.get("岗位分类-专业"));
-        if(StringUtils.isBlank(values.get("岗级"))){
+        String field10 = values.get("岗级");
+        if(field10 == null || "".equals(field10) || "null".equals(field10)) {
             pss.setInt(11, 0);
-        }else {
-            pss.setInt(11, Integer.valueOf(values.get("岗级")));
+        }else{
+            field10 = field10.substring(0,field10.lastIndexOf("."));
+            pss.setInt(11, Integer.valueOf(field10));
         }
         pss.setString(12, values.get("岗位分类-大类"));
         pss.setString(13, values.get("岗位分类-中类"));
         pss.setString(14, values.get("岗位分类-小类"));
-        pss.setString(15, values.get("薪级"));
+        String field15 = values.get("薪级");
+        if(field15 == null || "".equals(field15) || "null".equals(field15)) {
+            pss.setInt(11, 0);
+        }else{
+            field15 = field15.substring(0,field15.lastIndexOf("."));
+            pss.setInt(11, Integer.valueOf(field15));
+        }
         pss.setString(16, values.get("预留1"));
         pss.setString(17, values.get("预留2"));
         pss.setString(18, values.get("预留3"));
@@ -593,16 +582,20 @@ public class UploadServlet extends HttpServlet{
         pss.setString(5, values.get("工作单位"));
         pss.setString(6, values.get("部门"));
         pss.setString(7, values.get("岗位"));
-        if(StringUtils.isBlank(values.get("岗位标识"))) {
-            pss.setInt(8, 0);
+        String field8 = values.get("岗位标识");
+        if(field8 == null || "".equals(field8) || "null".equals(field8)) {
+            pss.setInt(9, 0);
         }else{
-            pss.setInt(8, Integer.valueOf(values.get("岗位标识")));
+            field8 = field8.substring(0,field8.lastIndexOf("."));
+            pss.setInt(9, Integer.valueOf(field8));
         }
-        pss.setString(9, values.get("岗位分类-专业"));
-        if(StringUtils.isBlank(values.get("岗级"))) {
-            pss.setInt(10, 0);
+        pss.setString(10, values.get("岗位分类-专业"));
+        String field10 = values.get("岗级");
+        if(field10 == null || "".equals(field10) || "null".equals(field10)) {
+            pss.setInt(11, 0);
         }else{
-            pss.setInt(10, Integer.valueOf(values.get("岗级")));
+            field10 = field10.substring(0,field10.lastIndexOf("."));
+            pss.setInt(11, Integer.valueOf(field10));
         }
         pss.setString(11, values.get("岗位分类-大类"));
         pss.setString(12, values.get("岗位分类-中类"));
@@ -646,7 +639,7 @@ public class UploadServlet extends HttpServlet{
 
     public void updateFamily(Connection conn, Map<String,String> values) throws SQLException {
         String sql = "update family set field1=?,field2=?,field3=?,field4=?,field5=?,field6=?,field7=?,field8=?,field9=?,field10=?," +
-                "field11=?,field12=?,field13=?,field14=?,updatetime=? where field2=?,deletetime=''";
+                "field11=?,field12=?,field13=?,field14=?,updatetime=?,deletetime='' where field2=?";
         PreparedStatement pss = conn.prepareStatement(sql);
         pss.setString(1, values.get("姓名"));
         pss.setString(2, values.get("身份证号"));
