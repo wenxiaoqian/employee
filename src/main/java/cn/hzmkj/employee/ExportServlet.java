@@ -285,7 +285,7 @@ public class ExportServlet extends HttpServlet{
     public List<Map<String, String>> loadEmpData(){
         List<Map<String, String>> dataList = new ArrayList<Map<String, String>>();
         try{
-            String sql = "select * from employee where deletetime is null order by id";
+            String sql = "select * from employee where length(ifnull(deletetime,'')) = 0 order by id";
             Connection conn = DBTool.getConnection();
             PreparedStatement pss = conn.prepareStatement(sql);
             ResultSet rss = pss.executeQuery();

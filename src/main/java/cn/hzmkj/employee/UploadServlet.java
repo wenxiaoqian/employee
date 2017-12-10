@@ -279,10 +279,10 @@ public class UploadServlet extends HttpServlet{
                 "field61,field62,field63,field64,field65,field66,field67,field68,field69,field70," +
                 "field71,field72,field73,field74,field75,field76,field77,field78,field79,field80," +
                 "field81,field82,field83,field84,field85,field86,field87,field88,field89,field90," +
-                "field91,field92,field93,field94,field95,createtime,updatetime) " +
+                "field91,field92,field93,createtime,updatetime) " +
                 "values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?," +
                 "?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?," +
-                "?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+                "?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 
         PreparedStatement pss = conn.prepareStatement(sql);
         pss.setString(1,values.get("姓名"));
@@ -304,11 +304,14 @@ public class UploadServlet extends HttpServlet{
         pss.setString(17,values.get("职务级别、岗位标识"));
         pss.setString(18,values.get("任现职务时间"));
         pss.setString(19,values.get("岗位"));
-        String gangji = values.get("岗级");
-        if(gangji==null || "".equals(gangji.trim()) || "null".equals(gangji.trim())) {
+        String field20 = values.get("岗级");
+        if(field20 == null || "".equals(field20) || "null".equals(field20)) {
             pss.setInt(20, 0);
         }else{
-            pss.setInt(20, Integer.valueOf(gangji));
+            if(field20.lastIndexOf(".") > 0) {
+                field20 = field20.substring(0, field20.lastIndexOf("."));
+            }
+            pss.setInt(20, Integer.valueOf(field20));
         }
         pss.setString(21,values.get("个人身份"));
         pss.setString(22,values.get("全日制学历"));
@@ -324,11 +327,14 @@ public class UploadServlet extends HttpServlet{
         pss.setString(32,values.get("专家人才类型-取得时间"));
         pss.setString(33,values.get("集中部署ID"));
         pss.setString(34,values.get("本地ERPID"));
-        String xinji = values.get("薪级");
-        if(xinji==null || "".equals(xinji.trim()) || "null".equals(xinji.trim())) {
+        String field35 = values.get("薪级");
+        if(field35 == null || "".equals(field35) || "null".equals(field35)) {
             pss.setInt(35, 0);
         }else{
-            pss.setInt(35, Integer.valueOf(xinji));
+            if(field35.lastIndexOf(".") > 0) {
+                field35 = field35.substring(0, field35.lastIndexOf("."));
+            }
+            pss.setInt(35, Integer.valueOf(field35));
         }
         pss.setString(36,values.get("岗位分类代码"));
         pss.setString(37,values.get("岗位分类-大类"));
@@ -406,7 +412,7 @@ public class UploadServlet extends HttpServlet{
                 "field61=?,field62=?,field63=?,field64=?,field65=?,field66=?,field67=?,field68=?,field69=?,field70=?," +
                 "field71=?,field72=?,field73=?,field74=?,field75=?,field76=?,field77=?,field78=?,field79=?,field80=?," +
                 "field81=?,field82=?,field83=?,field84=?,field85=?,field86=?,field87=?,field88=?,field89=?,field90=?," +
-                "field91=?,field92=?,field93=?,field94=?,field95=?,updatetime=?,deletetime='' " +
+                "field91=?,field92=?,field93=?,updatetime=?,deletetime='' " +
                 "where field13=?";
 
         PreparedStatement pss = conn.prepareStatement(sql);
@@ -433,7 +439,9 @@ public class UploadServlet extends HttpServlet{
         if(field20 == null || "".equals(field20) || "null".equals(field20)) {
             pss.setInt(20, 0);
         }else{
-            field20 = field20.substring(0,field20.lastIndexOf("."));
+            if(field20.lastIndexOf(".") > 0) {
+                field20 = field20.substring(0, field20.lastIndexOf("."));
+            }
             pss.setInt(20, Integer.valueOf(field20));
         }
         pss.setString(21,values.get("个人身份"));
@@ -454,7 +462,9 @@ public class UploadServlet extends HttpServlet{
         if(field35 == null || "".equals(field35) || "null".equals(field35)) {
             pss.setInt(35, 0);
         }else{
-            field35 = field35.substring(0,field35.lastIndexOf("."));
+            if(field35.lastIndexOf(".") > 0) {
+                field35 = field35.substring(0, field35.lastIndexOf("."));
+            }
             pss.setInt(35, Integer.valueOf(field35));
         }
         pss.setString(36,values.get("岗位分类代码"));
@@ -584,18 +594,18 @@ public class UploadServlet extends HttpServlet{
         pss.setString(7, values.get("岗位"));
         String field8 = values.get("岗位标识");
         if(field8 == null || "".equals(field8) || "null".equals(field8)) {
-            pss.setInt(9, 0);
+            pss.setInt(8, 0);
         }else{
             field8 = field8.substring(0,field8.lastIndexOf("."));
-            pss.setInt(9, Integer.valueOf(field8));
+            pss.setInt(8, Integer.valueOf(field8));
         }
-        pss.setString(10, values.get("岗位分类-专业"));
+        pss.setString(9, values.get("岗位分类-专业"));
         String field10 = values.get("岗级");
         if(field10 == null || "".equals(field10) || "null".equals(field10)) {
-            pss.setInt(11, 0);
+            pss.setInt(10, 0);
         }else{
             field10 = field10.substring(0,field10.lastIndexOf("."));
-            pss.setInt(11, Integer.valueOf(field10));
+            pss.setInt(10, Integer.valueOf(field10));
         }
         pss.setString(11, values.get("岗位分类-大类"));
         pss.setString(12, values.get("岗位分类-中类"));
