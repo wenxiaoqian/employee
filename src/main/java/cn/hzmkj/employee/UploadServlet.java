@@ -302,7 +302,7 @@ public class UploadServlet extends HttpServlet{
         pss.setString(15,values.get("职业资格获得时间"));
         pss.setString(16,values.get("职务"));
         pss.setString(17,values.get("职务级别、岗位标识"));
-        pss.setString(18,values.get("任现职务时间"));
+        pss.setString(18,values.get("任现级别时间"));
         pss.setString(19,values.get("岗位"));
         String field20 = values.get("岗级");
         if(field20 == null || "".equals(field20) || "null".equals(field20)) {
@@ -433,7 +433,7 @@ public class UploadServlet extends HttpServlet{
         pss.setString(15,values.get("职业资格获得时间"));
         pss.setString(16,values.get("职务"));
         pss.setString(17,values.get("职务级别、岗位标识"));
-        pss.setString(18,values.get("任现职务时间"));
+        pss.setString(18,values.get("任现级别时间"));
         pss.setString(19,values.get("岗位"));
         String field20 = values.get("岗级");
         if(field20 == null || "".equals(field20) || "null".equals(field20)) {
