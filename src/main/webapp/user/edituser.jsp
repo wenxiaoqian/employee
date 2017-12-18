@@ -22,7 +22,7 @@
     </div>
     <div style="margin-top:15px;">
         <label>用户权限：</label>
-        <input type="checkbox" name="roleId" value="0001" <c:if test="${fn:indexOf(user.roleId,'0001') > -1}">checked</c:if>/>滩访市供电局
+        <input type="checkbox" name="roleId" value="0001" <c:if test="${fn:indexOf(user.roleId,'0001') > -1}">checked</c:if>/>滩坊市供电局
 
         <input type="checkbox" name="roleId" value="0002" <c:if test="${fn:indexOf(user.roleId,'0002') > -1}">checked</c:if>/>国网安丘市供电公司
 
@@ -40,7 +40,7 @@
 
         <input type="checkbox" name="roleId" value="0009"  <c:if test="${fn:indexOf(user.roleId,'0009') > -1}">checked</c:if>/>国网寿光市供电公司
 
-        <input type="checkbox" name="roleId" value="00010" <c:if test="${fn:indexOf(user.roleId,'0010') > -1}">checked</c:if>/>国网诸城市供电公司
+        <input type="checkbox" name="roleId" value="0010" <c:if test="${fn:indexOf(user.roleId,'0010') > -1}">checked</c:if>/>国网诸城市供电公司
     </div>
 </div>
 </form>

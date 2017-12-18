@@ -89,7 +89,7 @@
                     <td>${user.account}</td>
                     <td>
                         <c:if test="${fn:indexOf(user.roleId,'0001') > -1}">
-                        滩访市供电局，
+                        滩坊市供电局，
                         </c:if>
                         <c:if test="${fn:indexOf(user.roleId,'0002') > -1}">
                             国网安丘市供电公司，

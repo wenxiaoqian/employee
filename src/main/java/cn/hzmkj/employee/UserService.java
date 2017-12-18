@@ -1,5 +1,7 @@
 package cn.hzmkj.employee;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -319,6 +321,22 @@ public class UserService {
             DBTool.closeConnection(conn);
         }
         return false;
+    }
+
+    public void  updateDepartTime(){
+        Connection conn = DBTool.getConnection() ;
+        try {
+            String sql = "update operation set updatetime = ? where type = 'department_data' ";
+            PreparedStatement pss = conn.prepareStatement(sql);
+            String currentTime = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date());
+            pss.setString(1, currentTime);
+            pss.executeUpdate();
+            pss.close();
+        }catch (Exception ex){
+            ex.printStackTrace();
+        }finally {
+            DBTool.closeConnection(conn);
+        }
     }
 
     /**

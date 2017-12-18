@@ -56,6 +56,7 @@ public class DeptServlet extends BaseServlet {
         }
         boolean result = userService.deleteDept(pid);
         if (result) {
+            userService.updateDepartTime();
             out.print("success");
         } else {
             out.print("删除失败");
@@ -98,6 +99,7 @@ public class DeptServlet extends BaseServlet {
         boolean result = userService.addDept(deptName, deptNo, Integer.parseInt(parentId));
         PrintWriter out = resp.getWriter();
         if (result) {
+            userService.updateDepartTime();
             out.print("success");
         } else {
             out.print("添加失败");
@@ -145,6 +147,7 @@ public class DeptServlet extends BaseServlet {
         boolean result = userService.updateDept(deptName, deptNo, Integer.parseInt(id));
         PrintWriter out = resp.getWriter();
         if (result) {
+            userService.updateDepartTime();
             out.print("success");
         } else {
             out.print("修改失败");

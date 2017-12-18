@@ -1,5 +1,9 @@
 package cn.hzmkj.employee;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import org.apache.commons.lang.StringUtils;
 
 import javax.servlet.ServletException;
@@ -39,10 +43,57 @@ public class UserServlet extends BaseServlet {
             deleteUser(req,resp);
         }else if("userlist".equals(operation)) {
             userlist(req, resp);
+        }else if("flushData".equals(operation)){
+            flushData(req, resp);
         }else {
             list(req, resp);
         }
 
+    }
+
+    private void flushData(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+
+        PrintWriter out = resp.getWriter();
+        boolean result = true;
+
+        if (result) {
+            out.print("success");
+        } else {
+            out.print("failed");
+        }
+    }
+
+    public void  flushData(){
+        Connection conn = DBTool.getConnection() ;
+        try {
+            String sql = "delete from employee";
+            PreparedStatement pss = conn.prepareStatement(sql);
+            pss.executeUpdate();
+
+            sql = "delete from family ";
+            pss = conn.prepareStatement(sql);
+            pss.executeUpdate();
+            sql = "delete from works ";
+            pss = conn.prepareStatement(sql);
+            pss.executeUpdate();
+            sql = "delete from educate ";
+            pss = conn.prepareStatement(sql);
+            pss.executeUpdate();
+            sql = "delete from lend ";
+            pss = conn.prepareStatement(sql);
+            pss.executeUpdate();
+
+            sql = "update operation set updatetime = ? where type = 'flush_data' ";
+            pss = conn.prepareStatement(sql);
+            String currentTime = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date());
+            pss.setString(1, currentTime);
+            pss.executeUpdate();
+            pss.close();
+        }catch (Exception ex){
+            ex.printStackTrace();
+        }finally {
+            DBTool.closeConnection(conn);
+        }
     }
 
     private void deleteUser(HttpServletRequest req, HttpServletResponse resp) throws IOException {
