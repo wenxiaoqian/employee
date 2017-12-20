@@ -54,16 +54,15 @@ public class UserServlet extends BaseServlet {
     private void flushData(HttpServletRequest req, HttpServletResponse resp) throws IOException {
 
         PrintWriter out = resp.getWriter();
-        boolean result = true;
-
-        if (result) {
+        boolean result = flushData();;
+        if(result) {
             out.print("success");
         } else {
             out.print("failed");
         }
     }
 
-    public void  flushData(){
+    public boolean flushData(){
         Connection conn = DBTool.getConnection() ;
         try {
             String sql = "delete from employee";
@@ -89,11 +88,15 @@ public class UserServlet extends BaseServlet {
             pss.setString(1, currentTime);
             pss.executeUpdate();
             pss.close();
+
+            return true;
         }catch (Exception ex){
             ex.printStackTrace();
         }finally {
             DBTool.closeConnection(conn);
         }
+
+        return false;
     }
 
     private void deleteUser(HttpServletRequest req, HttpServletResponse resp) throws IOException {

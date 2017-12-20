@@ -68,7 +68,7 @@ public class SynchServlet extends HttpServlet{
     public List<Map<String, String>> loadOperation(){
         List<Map<String, String>> dataList = new ArrayList<Map<String, String>>();
         try{
-            String sql = "select * from opertion ";
+            String sql = "select * from operation ";
             Connection conn = DBTool.getConnection();
             PreparedStatement pss = conn.prepareStatement(sql);
             ResultSet rss = pss.executeQuery();
