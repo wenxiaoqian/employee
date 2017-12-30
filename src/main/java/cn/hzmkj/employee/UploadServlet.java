@@ -141,6 +141,9 @@ public class UploadServlet extends HttpServlet{
             for(int j=0;j<totalColumns;j++){
                 cell = row.getCell(j);
                 String cellValue = cell.getStringCellValue();
+                if(cellValue != null){
+                    cellValue = cellValue.trim();
+                }
                 headMap.put(j,cellValue);
             }
             // 从第 2 行开始读
@@ -161,8 +164,8 @@ public class UploadServlet extends HttpServlet{
                         cellValue = String.valueOf(cell.getStringCellValue());
                     }
                     value.put(headMap.get(j), cellValue);
-                    System.out.println(cellValue);
                 }
+                System.out.println(value);
                 values.add(value);
             }
             Connection conn = DBTool.getConnection();
